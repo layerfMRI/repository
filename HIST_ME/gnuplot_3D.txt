@@ -1,0 +1,37 @@
+#aufrufen mit load "./gnuplot.txt"
+set terminal x11 enhanced 40 
+
+
+#set terminal postscript enhanced color solid "Helvetica" 10
+#set out "3D_plot.ps"
+
+
+
+set pm3d map
+set hidden3d
+
+#set y2tics autofreq
+
+#set title "Distribution of {/Symbol D}CBV vs. {/Symbol D}BOLD"  font "Helvetica,30"
+#set ylabel "relative signal change of {/Symbol D}BOLD  "  font "Helvetica,20"
+#set y2label "normalized partial pressure" font "Helvetica,20"
+#set xlabel "relative signal change of {/Symbol D}CBV " font "Helvetica,20"
+#set xrange [-10:10]
+#set yrange [-10:10]
+set zrange [0.:200000000000.]
+
+#set size ratio 0.35
+#set grid
+#set ytics ("0" 0 , "1" 1, "-1" -1) 
+#set xtics (  "{/Symbol D} T" -85.37  , "-60.98" -60.98,  "-36.59" -36.59,  "-12.2" -12.2, "0" 0, "12.2" 12.2,  "36.59" 36.59,  "60.98" 60.98, "85.37" 85.37 )
+#set size 1.5
+
+set ticslevel 0.0001
+
+splot "3dhist.dat" with pm3d 
+#splot "combined.dat" with pm3d 
+#splot "3dhist_M_Vasa_31.dat" with pm3d 
+#splot "3dhist_M_Vasa.dat" with pm3d 
+
+set term x11
+exit

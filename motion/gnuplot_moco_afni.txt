@@ -1,0 +1,36 @@
+#aufrufen mit load "./gnuplot.txt"
+
+
+#set terminal x11 enhanced 40
+set terminal postscript enhanced color solid  "Helvetica" 10
+
+set out "motion.ps"
+
+set key left bottom # für Position of Legend
+
+
+set title "Motion across timesteps"   font "Helvetica,10"
+set ylabel "displacement in mm"  font "Helvetica,10"
+set xlabel "|time in TR"  font "Helvetica,10"
+#set xrange [-2:2]
+set yrange [-1:1]
+set size ratio 0.6
+#set grid
+#set ytics ("0" 0 , "1" 1, "-1" -1) 
+#set xtics (  "{/Symbol D} T" -85.37  , "-60.98" -60.98,  "-36.59" -36.59,  "-12.2" -12.2, "0" 0, "12.2" 12.2,  "36.59" 36.59,  "60.98" 60.98, "85.37" 85.37 )
+
+
+plot 	"BOLD.mot.1D" u 0:4  with lines  title "Not_nulled x"  linecolor rgb "green" ,\
+	"BOLD.mot.1D" u 0:5  with lines  title "Not_nulled y"  linecolor rgb "red" ,\
+	"BOLD.mot.1D" u 0:6  with lines  title "Not_nulled z"  linecolor rgb "brown" ,\
+	"Nulled.mot.1D" u 0:4  with lines  title "nulled x"  linecolor rgb "turquoise" ,\
+	"Nulled.mot.1D" u 0:5  with lines  title "nulled y"  linecolor rgb "pink" ,\
+	"Nulled.mot.1D" u 0:6  with lines  title "nulled z"  linecolor rgb "black" 
+
+#replot "plochsim_5_ohne.csv" using 1 with lines title "with eddy currents and  {/Symbol t} = 0.2 ms" linecolor rgb "blue"
+
+set term x11
+exit
+
+
+

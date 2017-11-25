@@ -1,0 +1,38 @@
+#aufrufen mit load "./gnuplot.txt"
+#set terminal x11 enhanced 40 
+
+
+set terminal postscript enhanced color solid "Helvetica" 10
+set out "Noise_Kernal.ps"
+set pm3d map
+#set hidden3d
+
+#set y2tics autofreq
+
+set title "layer"  font "Helvetica,30"
+set ylabel "layer"  font "Helvetica,20"
+
+#set xrange [] reverse
+#set yrange [] reverse
+#set y2label "normalized partial pressure" font "Helvetica,20"
+set xlabel "layers 2 " font "Helvetica,20"
+#set xrange [-.1:61]
+#set yrange [0.994:1.02]
+#set y2range [-3:2.5]
+set zrange [-0.1:0.4]
+
+#set size ratio 0.35
+#set grid
+#set ytics ("0" 0 , "1" 1, "-1" -1) 
+#set xtics (  "{/Symbol D} T" -85.37  , "-60.98" -60.98,  "-36.59" -36.59,  "-12.2" -12.2, "0" 0, "12.2" 12.2,  "36.59" 36.59,  "60.98" 60.98, "85.37" 85.37 )
+#set size 1.5
+
+#set ticslevel 0.0001
+
+
+splot "layer.dat" 
+
+
+
+set term x11
+exit

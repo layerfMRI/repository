@@ -1,0 +1,27 @@
+ 
+set terminal x11 enhanced 40
+#set terminal postscript enhanced color solid "Helvetica" 25
+#set out "thickness.ps"
+
+set title "" 
+set ylabel "CBV rest in percent" 
+set xlabel "cortical depth"
+
+plot 	"layer_norm.dat" u 1:($2) w lines title "tissue type 1"  linewidth 2 linecolor rgb "red"  ,\
+	"layer_norm.dat" u 1:($3) w lines title "tissue type 2"  linewidth 2 linecolor rgb "blue"  ,\
+	"layer_norm.dat" u 1:($4) w lines title "tissue type 3"  linewidth 2 linecolor rgb "green"  ,\
+	0*sin(x)+1  linewidth 1 linecolor rgb "black" 
+     
+   #     "layer_Wed.0dat" u ($1)+.5:($3)*1.17 w lines title "rat wednesday"  linewidth 2 linecolor rgb "green" ,\
+   #  "layer_gina10.dat" u ($1)*1.04+0.25:($3)*1.07 w lines title "monkey gina 2"  linewidth 2 linecolor rgb "orange",\
+     
+#set xtics ( "-1" -1, "w-1" w-1 ,  "0" 0, "1-w" 1-w  ,  "1" 1) 
+#set ytics ( "Amin" Amin, "c" c, "Amax" Amax, "0" 0 ) 
+#set sample 1000
+
+#G(x) title "Gradient" linewidth 2  ,\ 
+
+#plot deltaw(x) title "deltaW" linewidth 2
+
+set term x11
+exit

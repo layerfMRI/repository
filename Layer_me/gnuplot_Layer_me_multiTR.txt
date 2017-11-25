@@ -1,0 +1,27 @@
+ 
+set terminal x11 enhanced 40
+#set terminal postscript enhanced color solid "Helvetica" 25
+#set out "thickness.ps"
+
+set title "" 
+set ylabel "activity" 
+set xlabel "cortical depth"
+
+plot 	"layer_profile.dat" u 1:($2) w lines title "contrast type 1"  linewidth 3 linecolor rgb "blue"  ,\
+        "layer_profile.dat" u 1:($3) w lines title "contrast type 1"  linewidth 3 linecolor rgb "red"  ,\
+	"layer_profile.dat" u 1:($4) w lines title "contrast type 1"  linewidth 3 linecolor rgb "green"  ,\
+	"layer_profile.dat" u 1:($5) w lines title "contrast type 1"  linewidth 3 linecolor rgb "black"  ,\
+	"layer_profile.dat" u 1:($6) w lines title "contrast type 1"  linewidth 3 linecolor rgb "orange"  ,\
+	"layer_profile.dat" u 1:($7) w lines title "contrast type 1"  linewidth 3 linecolor rgb "turquoise"  ,\
+	"layer_profile.dat" u 1:($8) w lines title "contrast type 1"  linewidth 3 linecolor rgb "brown" 
+
+#set xtics ( "-1" -1, "w-1" w-1 ,  "0" 0, "1-w" 1-w  ,  "1" 1) 
+#set ytics ( "Amin" Amin, "c" c, "Amax" Amax, "0" 0 ) 
+#set sample 1000
+
+#G(x) title "Gradient" linewidth 2  ,\ 
+
+#plot deltaw(x) title "deltaW" linewidth 2
+
+set term x11
+exit

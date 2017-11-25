@@ -1,0 +1,45 @@
+ 
+set terminal x11 enhanced 40
+#set terminal postscript enhanced color solid "Helvetica" 25
+#set out "thickness.ps"
+
+set title "" 
+set ylabel "CBV rest in percent" 
+set xlabel "cortical depth"
+#set xrange [0.:2500]
+#set yrange [-0:4000]
+
+
+#fit f1(x) "hist.dat"  via  s, a, c, s2, a2, c2
+
+     
+#splot 	"time_courses.dat" 
+plot 	"time_coarses_plot.dat"  u 1:2 w lines,\
+	"time_coarses_plot.dat"  u 1:3 w lines,\
+	"time_coarses_plot.dat"  u 1:4 w lines,\
+	"time_coarses_plot.dat"  u 1:5 w lines,\
+	"time_coarses_plot.dat"  u 1:6 w lines,\
+	"time_coarses_plot.dat"  u 1:7 w lines,\
+	"time_coarses_plot.dat"  u 1:8 w lines,\
+	"time_coarses_plot.dat"  u 1:9 w lines,\
+	"time_coarses_plot.dat"  u 1:10 w lines,\
+	"time_coarses_plot.dat"  u 1:11 w lines,\
+	"time_coarses_plot.dat"  u 1:12 w lines,\
+	"time_coarses_plot.dat"  u 1:13 w lines,\
+	"time_coarses_plot.dat"  u 1:14 w lines,\
+	"time_coarses_plot.dat"  u 1:15 w lines,\
+	"time_coarses_plot.dat"  u 1:16 w lines,\
+	"time_coarses_plot.dat"  u 1:17 w lines,\
+	"time_coarses_plot.dat"  u 1:18 w lines,\
+	"time_coarses_plot.dat"  u 1:19 w lines,\
+	"time_coarses_plot.dat"  u 1:20 w lines,\
+
+
+
+
+
+
+#plot deltaw(x) title "deltaW" linewidth 2
+
+set term x11
+exit

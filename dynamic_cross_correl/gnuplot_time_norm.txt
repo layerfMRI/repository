@@ -1,0 +1,33 @@
+ 
+set terminal x11 enhanced 40
+#set terminal postscript enhanced color solid "Helvetica" 25
+#set out "thickness.ps"
+
+set title "" 
+set ylabel "CBV rest in percent" 
+set xlabel "cortical depth"
+#set xrange [0.:2500]
+#set yrange [-0:4000]
+set pm3d map
+
+#f1(x) = a * exp(-(x-c)*(x-c)/s) + a2 * exp(-(x-c2)*(x-c2)/s2)
+
+#fit f1(x) "hist.dat"  via  s, a, c, s2, a2, c2
+
+     
+#splot 	"time_courses.dat" 
+splot 	"time_norm.dat" 
+    
+   #     "layer_Wed.0dat" u ($1)+.5:($3)*1.17 w lines title "rat wednesday"  linewidth 2 linecolor rgb "green" ,\
+   #  "layer_gina10.dat" u ($1)*1.04+0.25:($3)*1.07 w lines title "monkey gina 2"  linewidth 2 linecolor rgb "orange",\
+     
+#set xtics ( "-1" -1, "w-1" w-1 ,  "0" 0, "1-w" 1-w  ,  "1" 1) 
+#set ytics ( "Amin" Amin, "c" c, "Amax" Amax, "0" 0 ) 
+#set sample 1000
+
+#G(x) title "Gradient" linewidth 2  ,\ 
+
+#plot deltaw(x) title "deltaW" linewidth 2
+
+set term x11
+exit

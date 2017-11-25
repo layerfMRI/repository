@@ -1,0 +1,39 @@
+ 
+set terminal x11 enhanced 40
+set terminal postscript enhanced color solid "Helvetica" 25
+
+set out "t1_star.ps"
+
+set title "T1^{*}-Distribution" 
+set ylabel "# Voxel / {/Symbol D} T1^{*}" 
+set xlabel "T1^{*} in ms"
+#set xrange [850.:3000]
+#set yrange [-0:1620]
+
+s = 200
+a = 1600
+c = 1400
+s2 = 300
+a2 = 1100
+c2 = 1450
+
+
+#f1(x) = a * exp(-(x-c)*(x-c)/s) + a2 * exp(-(x-c2)*(x-c2)/s2)
+
+#fit f1(x) "hist.dat"  via  s, a, c, s2, a2, c2
+
+
+
+plot "hist.dat" w histeps title "# Voxel / {/Symbol D} T1^{*}"  linewidth 4   # , f1(x) title "Best-Fit Curve"
+
+
+#set xtics ( "-1" -1, "w-1" w-1 ,  "0" 0, "1-w" 1-w  ,  "1" 1) 
+#set ytics ( "Amin" Amin, "c" c, "Amax" Amax, "0" 0 ) 
+#set sample 1000
+
+#G(x) title "Gradient" linewidth 2  ,\ 
+
+#plot deltaw(x) title "deltaW" linewidth 2
+
+set term x11
+exit

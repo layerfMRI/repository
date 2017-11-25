@@ -1,0 +1,49 @@
+#!/usr/bin/gnuplot
+#
+# Plot a historgram from a one dimensional data array
+# compare: http://stackoverflow.com/questions/2471884/histogram-using-gnuplot
+#
+
+reset
+set macros
+
+# wxt
+#set terminal wxt size 350,262 enhanced font 'Verdana,10' persist
+# png
+#set terminal pngcairo size 350,262 enhanced font 'Verdana,10'
+#set output 'histogram1.png'
+
+# colors
+set style line 1 lt 1 lc rgb '#FB9A99' # light red
+set style line 2 lt 1 lc rgb '#A6CEE3' # light blue
+
+#unset key
+
+
+set xrange [-10:100]
+set xtics 0.02
+set mxtics 0.01
+
+# call histogram function
+binwidth = 0.6
+binstart = 0
+binwidth2 = 0.2
+binstart2 = -5
+
+# set width of single bins in histogram
+set boxwidth 0.9*binwidth
+# set fill style of bins
+set style fill solid 0.5
+
+
+#set pm3d map
+
+plot 'points_file1.dat' u (binwidth*(floor(($1-binstart)/binwidth)+0.5)+binstart):(1.0)  smooth freq
+
+replot 'points_file1.dat' u (binwidth*(floor(($2-binstart2)/binwidth2)+0.5)+binstart2):(1.0)  smooth freq
+
+
+
+
+
+
