@@ -1,0 +1,12 @@
+This is my implementation of the VASO evaluation. 
+It is almost identical to the evaluation that we went through together in Leipzig. 
+I implemented it in Matlab in order to acquire a taste for Matlab step by step.
+
+The starting point of this evaluation are the motion corrected images with nulled blood and with not-nulled blood.
+
+Here, I also use a cluster mask that defines the ROI. This mask is generated from FSL Feat. 
+In order to scale the VASO signal change to dCBV change, CBVrest is calculated from GM-Maps.
+
+Please let, me know if you are interested to get the evaluation code of the GM-map in Matlab. 
+
+The folder "nifti_view" must be in the same directory as the script "evaluation.m"
