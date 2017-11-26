@@ -1,0 +1,9 @@
+ipython1x notebook # runs notebook
+
+Run from courser in block with "Ctrl + Enter"
+Run from courser in block and put curser at and of block with "shift + Enter"
+
+
+script is the file with *.ipynb
+
+convert to scrip with phython1x nbconvert datainmane.ipynb --topython
