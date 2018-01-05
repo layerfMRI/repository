@@ -11,9 +11,12 @@ Example fMRI data of layer activity can be downloaded here: https://activecho.ci
 
 For example pipelines see www.layerfMRI.com
 
-E.g.: 
+E.g.:
+ 
 -> example on how to obtain layers in EPI-space see: https://layerfmri.com/2017/11/26/getting-layers-in-epi-space/
+
 -> example on a VASO evaluation scheme including BOLD correction and VASO-specific motion correction see: https://layerfmri.com/2017/11/25/motion-and-bold-correction/
+
 -> A documentation on how to use the scand-alone C++ nifti-i/o can be found here: https://layerfmri.com/2017/11/30/using-a-standalone-nii-i-o-in-c/
 
 
