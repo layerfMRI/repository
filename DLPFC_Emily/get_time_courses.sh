@@ -1,7 +1,7 @@
 #!/bin/bash
 
-   EXTR_1D_TIMESERIES MEAN_BOLD_trial_aplha_norm.nii upper_layer.nii 0
-   mv 1D_time_course.dat BOLD_aplha_upper.dat
+   EXTR_1D_TIMESERIES MEAN_BOLD_trial_alpha_norm.nii upper_layer.nii 0
+   mv 1D_time_course.dat BOLD_alpha_upper.dat
    EXTR_1D_TIMESERIES MEAN_BOLD_trial_rem_norm.nii upper_layer.nii 0
    mv 1D_time_course.dat BOLD_rem_upper.dat
    EXTR_1D_TIMESERIES MEAN_BOLD_trial_go_norm.nii upper_layer.nii 0
