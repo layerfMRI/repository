@@ -8,7 +8,7 @@ fslmaths $1 -bptf -1 1 filtered_$1
 
 echo "starting with first melodic decomposition"
 
-#melodic -i filtered_$1 --nomask --nobet -d 50
+melodic -i filtered_$1 --nomask --nobet -d 50
 
 cp  filtered_*.ica/melodic_IC.nii ./
 
