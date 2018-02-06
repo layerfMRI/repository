@@ -43,5 +43,7 @@ melodic -i masked_filtered_$1 --nomask --nobet -d 200
 
 cp  masked_filtered_*.ica/melodic_IC.nii ./ROI_IC.nii
 
+fslsplit ROI_IC.nii subcomponents -t
+
 #rm smoothed_network_$1 
 #rm network_$1 
