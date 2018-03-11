@@ -1,4 +1,9 @@
  
+#runs with:
+# gnuplot
+# load "gnuplot_Lyer_me_single_TR.txt"
+
+
 set terminal x11 enhanced 40
 #set terminal postscript enhanced color solid "Helvetica" 25
 #set out "profile.ps"
