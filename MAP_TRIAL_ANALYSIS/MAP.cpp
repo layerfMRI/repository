@@ -74,9 +74,12 @@ int main(int argc,char* argv[]) {
 
 
 cout << nrep <<" Zeitschritte" << endl; 
-cout << N_paradigms << " paradigms " << endl;
+cout << (double)(N - initial_rest)/((double)para_size) << " paradigms " << endl;
 
-
+nrep = N_paradigms * para_size ; 
+N = nrep; 
+cout << nrep <<"new  Zeitschritte" << endl; 
+cout << (double)(N - initial_rest)/((double)para_size) << " new  paradigms " << endl;
 
 
 
@@ -178,8 +181,8 @@ double slow_BOLD = 0.;
 
 
 	  if ( mask(0,islice,iy,ix) >= thresh ){
-	      data_dVASO(0,islice,iy,ix) = (sup_VASO-slow_VASO)/sup_VASO ;
-	      data_dBOLD(0,islice,iy,ix) = (sup_BOLD-slow_BOLD)/sup_BOLD ;
+	      data_dVASO(0,islice,iy,ix) = (sup_VASO-slow_VASO)/slow_VASO ;
+	      data_dBOLD(0,islice,iy,ix) = (sup_BOLD-slow_BOLD)/slow_BOLD ;
 	  }
 	//if ( data_dVASO(0,islice,iy,ix) <= -0.005 || data_BOLD(0,islice,iy,ix) <= 0 ) mask(0, islice,iy,ix) = 0; 
 
@@ -313,8 +316,8 @@ std_bold[t] = sqrt(std_bold[t]);
 //normieren 
 double baseline_vaso = 0.; 
 double baseline_bold = 0.; 
-baseline_vaso = ( t_VASO[(int)para_size-1] + t_VASO[(int)para_size-2] + t_VASO[(int)para_size-3] + t_VASO[(int)para_size-4]   ) / 4. ; 
-baseline_bold = ( t_BOLD[(int)para_size-1] + t_BOLD[(int)para_size-2] + t_BOLD[(int)para_size-3] + t_BOLD[(int)para_size-4]   ) / 4. ; 
+baseline_vaso = ( t_VASO[(int)para_size/2-1] + t_VASO[(int)para_size/2-2] + t_VASO[(int)para_size/2-3] + t_VASO[(int)para_size/2-4]   ) / 4. ; 
+baseline_bold = ( t_BOLD[(int)para_size/2-1] + t_BOLD[(int)para_size/2-2] + t_BOLD[(int)para_size/2-3] + t_BOLD[(int)para_size/2-4]   ) / 4. ; 
 
 
 	for (int t = 0 ; t < para_size ; t++ ) {
@@ -324,21 +327,23 @@ baseline_bold = ( t_BOLD[(int)para_size-1] + t_BOLD[(int)para_size-2] + t_BOLD[(
 	std_bold[t] = std_bold[t] / baseline_bold; 
 	}
 
-outf << -3. * TR_in_s << "  " << -3. * TR_in_s+ TR_in_s/2. << "   " << t_VASO[(int)para_size-4] << "  "   << t_BOLD[(int)para_size-4]  << "   " << std_vaso[(int)para_size-4] << "   " << std_bold[(int)para_size-4] << endl;
-outf << -2. * TR_in_s << "  " << -2. * TR_in_s+ TR_in_s/2. << "   " << t_VASO[(int)para_size-3] << "  "   << t_BOLD[(int)para_size-3]  << "   " << std_vaso[(int)para_size-3] << "   " << std_bold[(int)para_size-3] << endl;
-outf << -1. * TR_in_s << "  " << -1. * TR_in_s+ TR_in_s/2. << "   " << t_VASO[(int)para_size-2] << "  "   << t_BOLD[(int)para_size-2]  << "   " << std_vaso[(int)para_size-2] << "   " << std_bold[(int)para_size-2] << endl;
-outf << -0. * TR_in_s << "  " << -0. * TR_in_s+ TR_in_s/2. << "   " << t_VASO[(int)para_size-1] << "  "   << t_BOLD[(int)para_size-1]  << "   " << std_vaso[(int)para_size-1] << "   " << std_bold[(int)para_size-1] << endl;
+//outf << -3. * TR_in_s << "  " << -3. * TR_in_s+ TR_in_s/2. << "   " << t_VASO[(int)para_size-4] << "  "   << t_BOLD[(int)para_size-4]  << "   " << std_vaso[(int)para_size-4] << "   " << std_bold[(int)para_size-4] << endl;
+//outf << -2. * TR_in_s << "  " << -2. * TR_in_s+ TR_in_s/2. << "   " << t_VASO[(int)para_size-3] << "  "   << t_BOLD[(int)para_size-3]  << "   " << std_vaso[(int)para_size-3] << "   " << std_bold[(int)para_size-3] << endl;
+//outf << -1. * TR_in_s << "  " << -1. * TR_in_s+ TR_in_s/2. << "   " << t_VASO[(int)para_size-2] << "  "   << t_BOLD[(int)para_size-2]  << "   " << std_vaso[(int)para_size-2] << "   " << std_bold[(int)para_size-2] << endl;
+//outf << -0. * TR_in_s << "  " << -0. * TR_in_s+ TR_in_s/2. << "   " << t_VASO[(int)para_size-1] << "  "   << t_BOLD[(int)para_size-1]  << "   " << std_vaso[(int)para_size-1] << "   " << std_bold[(int)para_size-1] << endl;
 
-	for (int t = 0 ; t < para_size ; t++ ) {
+	for (int t = 3 ; t < para_size ; t++ ) {
 	  outf << (t+1) * TR_in_s << "  " << (t+1) * TR_in_s + TR_in_s/2. << "   " << t_VASO[t] << "  "   << t_BOLD[t]  << "   " << std_vaso[t] << "   " << std_bold[t] << endl; 
+	}
+	for (int t = 0 ; t < 9 ; t++ ) {
+	  outf << (para_size+t+1) * TR_in_s << "  " << (para_size+t+1) * TR_in_s + TR_in_s/2. << "   " << t_VASO[t] << "  "   << t_BOLD[t]  << "   " << std_vaso[t] << "   " << std_bold[t] << endl; 
 	}
 
 
-
-  sup_VASO =   t_VASO[para_size-4]    + t_VASO[para_size-3]   + t_VASO[para_size-2]   + t_VASO[para_size-1]   + t_VASO[0]  ; 
-  slow_VASO =   t_VASO[para_size/2-4] + t_VASO[para_size/2-3] + t_VASO[para_size/2-2] + t_VASO[para_size/2-1] + t_VASO[para_size/2] ;  
-  sup_BOLD =  t_BOLD[para_size/2-4] + t_BOLD[para_size/2-3] + t_BOLD[para_size/2-2] + t_BOLD[para_size/2-1] + t_BOLD[para_size/2]  ; 
-  slow_BOLD =  t_BOLD[para_size-4] + t_BOLD[para_size-3] + t_BOLD[para_size-2] + t_BOLD[para_size-1] + t_BOLD[0]  ;
+  sup_VASO =   t_VASO[para_size/2-4]    + t_VASO[para_size/2-3]   + t_VASO[para_size/2-2]   + t_VASO[para_size/2-1]   + t_VASO[para_size/2]  ; 
+  slow_VASO =   t_VASO[para_size-4] + t_VASO[para_size-3] + t_VASO[para_size-2] + t_VASO[para_size-1] + t_VASO[0] ;  
+  sup_BOLD =  t_BOLD[para_size-4] + t_BOLD[para_size-3] + t_BOLD[para_size-2] + t_BOLD[para_size-1] + t_BOLD[0]  ; 
+  slow_BOLD =  t_BOLD[para_size/2-4] + t_BOLD[para_size/2-3] + t_BOLD[para_size/2-2] + t_BOLD[para_size/2-1] + t_BOLD[para_size/2]  ;
 
 cout << " dVASO [%] = " << (sup_VASO -slow_VASO)/ slow_VASO * 100. << endl; 
 cout << " dBOLD [%] = " << (sup_BOLD -slow_BOLD)/ slow_BOLD * 100. << endl; 

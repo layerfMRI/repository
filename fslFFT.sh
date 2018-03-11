@@ -11,4 +11,4 @@ fslpspec "$1" "fslFFT_$1"
 
 echo " the units are: #TRs/(periode) "
 echo " e.g. if you  have 12 trials, the corresponding activity will be at the 11th position (starting counting from 0) "
-echo " the frequncy is of every TR can be calculates as :  volumen number /( TR in seconds * number of TRs )
+echo " the frequncy is of every TR can be calculates as :  volumen number /( TR in seconds * number of TRs )" 

@@ -1,23 +1,15 @@
  
 set terminal x11 enhanced 40
 #set terminal postscript enhanced color solid "Helvetica" 25
-#set out "thickness.ps"
+#set out "profile.ps"
 
-set title "" 
+set title "title" 
 set ylabel "activity" 
-set xlabel "cortical depth"
+set xlabel "cortical depth (left is WM, right is CSF)"
 
 plot 	"layer.dat" u 1:($2) w lines title "contrast type 1"  linewidth 3 linecolor rgb "blue"  ,\
         "layer.dat" u 1:($2):($3) w yerrorbars title "" pt 1  linewidth 2 linecolor rgb "blue"  
 
-
-#set xtics ( "-1" -1, "w-1" w-1 ,  "0" 0, "1-w" 1-w  ,  "1" 1) 
-#set ytics ( "Amin" Amin, "c" c, "Amax" Amax, "0" 0 ) 
-#set sample 1000
-
-#G(x) title "Gradient" linewidth 2  ,\ 
-
-#plot deltaw(x) title "deltaW" linewidth 2
 
 set term x11
 exit
