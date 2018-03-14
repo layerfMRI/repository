@@ -464,11 +464,11 @@ matlabbatch{1}.spm.spatial.realign.estwrite.eoptions.fwhm = 1;
 matlabbatch{1}.spm.spatial.realign.estwrite.eoptions.rtm = 1;
 matlabbatch{1}.spm.spatial.realign.estwrite.eoptions.interp = 4;
 matlabbatch{1}.spm.spatial.realign.estwrite.eoptions.wrap = [0 0 0];
-matlabbatch{1}.spm.spatial.realign.estwrite.eoptions.weight = {''};
+matlabbatch{1}.spm.spatial.realign.estwrite.eoptions.weight = {'moma.nii'};
 matlabbatch{1}.spm.spatial.realign.estwrite.roptions.which = [2 1];
 matlabbatch{1}.spm.spatial.realign.estwrite.roptions.interp = 4;
 matlabbatch{1}.spm.spatial.realign.estwrite.roptions.wrap = [0 0 0];
-matlabbatch{1}.spm.spatial.realign.estwrite.roptions.mask = 'moma.nii';
+matlabbatch{1}.spm.spatial.realign.estwrite.roptions.mask = 1;
 matlabbatch{1}.spm.spatial.realign.estwrite.roptions.prefix = 'Not_Nulled_';
 %%
 matlabbatch{2}.spm.spatial.realign.estwrite.data = {
@@ -932,11 +932,11 @@ matlabbatch{2}.spm.spatial.realign.estwrite.eoptions.fwhm = 1;
 matlabbatch{2}.spm.spatial.realign.estwrite.eoptions.rtm = 1;
 matlabbatch{2}.spm.spatial.realign.estwrite.eoptions.interp = 4;
 matlabbatch{2}.spm.spatial.realign.estwrite.eoptions.wrap = [0 0 0];
-matlabbatch{2}.spm.spatial.realign.estwrite.eoptions.weight = {''};
+matlabbatch{2}.spm.spatial.realign.estwrite.eoptions.weight = {'moma.nii'};
 matlabbatch{2}.spm.spatial.realign.estwrite.roptions.which = [2 1];
 matlabbatch{2}.spm.spatial.realign.estwrite.roptions.interp = 4;
 matlabbatch{2}.spm.spatial.realign.estwrite.roptions.wrap = [0 0 0];
-matlabbatch{2}.spm.spatial.realign.estwrite.roptions.mask = 'moma.nii';
+matlabbatch{2}.spm.spatial.realign.estwrite.roptions.mask = 1 ;
 matlabbatch{2}.spm.spatial.realign.estwrite.roptions.prefix = 'Nulled_';
 
 
