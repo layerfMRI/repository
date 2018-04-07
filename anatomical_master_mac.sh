@@ -23,7 +23,7 @@ antsRegistration \
 --float 0 \
 --collapse-output-transforms 1 \
 --output [registered_,registered_Warped.nii.gz,registered_InverseWarped.nii.gz] \
---interpolation Linear \
+--interpolation BSpline[5] \
 --use-histogram-matching 0 \
 --winsorize-image-intensities [0.005,0.995] \
 --initial-moving-transform initial_matrix.txt \

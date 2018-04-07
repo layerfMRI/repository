@@ -11,6 +11,9 @@ cp /Users/huberl/NeuroDebian/repository/bias_field_corr/Bias_field_script_job.m 
 
 3dcalc -a muncorr.nii -prefix muncorr.nii -overwrite -expr 'a' -datum short
 
+mv muncorr.nii bico_$1
+
+rm mucorr.nii
 rm uncorr.nii
 
 echo "und tschuess"
