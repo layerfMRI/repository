@@ -45,7 +45,7 @@ antsRegistration \
 --smoothing-sigmas 1x0vox
 
 #antsApplyTransforms -d 3 -i MP2RAGE.nii -o warped_MP2RAGE.nii -r MP2RAGE.nii -t registered_1Warp.nii.gz -t registered_0GenericAffine.mat
-antsApplyTransforms -d 3 -i MP2RAGE.nii -o warped_MP2RAGE.nii -r MP2RAGE.nii -t registered_1Warp.nii.gz -t registered_0GenericAffine.mat
+antsApplyTransforms --interpolation BSpline[5] -d 3 -i MP2RAGE.nii -o warped_MP2RAGE.nii -r MP2RAGE.nii -t registered_1Warp.nii.gz -t registered_0GenericAffine.mat
 
 3dcalc -a warped_MP2RAGE.nii -datum short -expr 'a' -prefix warped_MP2RAGE.nii -overwrite
 

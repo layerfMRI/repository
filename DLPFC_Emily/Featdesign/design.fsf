@@ -33,7 +33,7 @@ set fmri(sscleanup_yn) 0
 set fmri(outputdir) ""
 
 # TR(s)
-set fmri(tr) 4.000000 
+set fmri(tr) 3.000000 
 
 # Total volumes
 set fmri(npts) 165
@@ -267,7 +267,7 @@ set fmri(totalVoxels) 95265720
 set fmri(ncopeinputs) 0
 
 # 4D AVW data or FEAT directory (1)
-set feat_files(1) "/Users/huberl/Downloads/SCIURBA_JOSHUA_CHRISTIAN-07296368/ALPHA_MEAN/BOLD_ALPH_MEAN"
+set feat_files(1) "./BOLD"
 
 # Add confound EVs text file
 set fmri(confoundevs) 0
@@ -304,7 +304,7 @@ set fmri(tempfilt_yn1) 0
 set fmri(deriv_yn1) 1
 
 # Custom EV file (EV 1)
-set fmri(custom1) "/Users/huberl/Downloads/SCIURBA_JOSHUA_CHRISTIAN-07296368/stimulus/response.txt"
+set fmri(custom1) "/Users/huberl/NeuroDebian/repository/DLPFC_Emily/GO_NOGO_stimulus/response.txt"
 
 # Gamma sigma (EV 1)
 set fmri(gammasigma1) 3
@@ -356,7 +356,7 @@ set fmri(tempfilt_yn2) 1
 set fmri(deriv_yn2) 1
 
 # Custom EV file (EV 2)
-set fmri(custom2) "/Users/huberl/Downloads/SCIURBA_JOSHUA_CHRISTIAN-07296368/stimulus/alpha.txt"
+set fmri(custom2) "/Users/huberl/NeuroDebian/repository/DLPFC_Emily/ALPHA_REM_stimulus/alpha.txt"
 
 # Gamma sigma (EV 2)
 set fmri(gammasigma2) 3
@@ -408,7 +408,7 @@ set fmri(tempfilt_yn3) 1
 set fmri(deriv_yn3) 1
 
 # Custom EV file (EV 3)
-set fmri(custom3) "/Users/huberl/Downloads/SCIURBA_JOSHUA_CHRISTIAN-07296368/stimulus/remember.txt"
+set fmri(custom3) "/Users/huberl/NeuroDebian/repository/DLPFC_Emily/ALPHA_REM_stimulus/remember.txt"
 
 # Gamma sigma (EV 3)
 set fmri(gammasigma3) 3

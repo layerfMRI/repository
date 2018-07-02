@@ -17,6 +17,7 @@ echo "$sdelta_y"
 echo "$sdelta_z"
 
 3dresample -dxyz $sdelta_x $sdelta_y $sdelta_z -rmode Cu -overwrite -prefix scaled_$1 -input $1 
+#3dresample -dxyz $sdelta_x $sdelta_y $sdelta_z -rmode NN -overwrite -prefix scaled_$1 -input $1 
 
 echo "und tschuess"
 

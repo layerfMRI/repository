@@ -13,7 +13,7 @@ set title "Motion across timesteps"   font "Helvetica,10"
 set ylabel "displacement in mm"  font "Helvetica,10"
 set xlabel "|time in TR"  font "Helvetica,10"
 #set xrange [-2:2]
-set yrange [-1:1]
+#set yrange [-1:1]
 set size ratio 0.6
 #set grid
 #set ytics ("0" 0 , "1" 1, "-1" -1) 
