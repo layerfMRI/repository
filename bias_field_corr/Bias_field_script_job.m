@@ -5,7 +5,7 @@
 %-----------------------------------------------------------------------
 matlabbatch{1}.spm.spatial.preproc.channel.vols = {'./uncorr.nii,1'};
 matlabbatch{1}.spm.spatial.preproc.channel.biasreg = 0.001;
-matlabbatch{1}.spm.spatial.preproc.channel.biasfwhm = 60;
+matlabbatch{1}.spm.spatial.preproc.channel.biasfwhm = 30;
 matlabbatch{1}.spm.spatial.preproc.channel.write = [1 1];
 matlabbatch{1}.spm.spatial.preproc.tissue(1).tpm = {'/Users/huberl/SPM/spm12/tpm/TPM.nii,1'};
 matlabbatch{1}.spm.spatial.preproc.tissue(1).ngaus = 1;
