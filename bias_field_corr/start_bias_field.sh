@@ -13,7 +13,6 @@ cp /Users/huberl/NeuroDebian/repository/bias_field_corr/Bias_field_script_job.m 
 
 mv muncorr.nii bico_$1
 
-rm mucorr.nii
 rm uncorr.nii
 
 echo "und tschuess"

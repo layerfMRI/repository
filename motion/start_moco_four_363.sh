@@ -21,10 +21,14 @@ cp ./AMPL3.nii ./Basis_3b.nii
 
 fslsplit ./Basis_0a.nii splited 
 
-cp splited0004.nii splited0000.nii
-cp splited0005.nii splited0001.nii
-cp splited0006.nii splited0002.nii
-cp splited0007.nii splited0003.nii
+cp splited0008.nii splited0000.nii
+cp splited0009.nii splited0001.nii
+cp splited0010.nii splited0002.nii
+cp splited0011.nii splited0003.nii
+cp splited0012.nii splited0004.nii
+cp splited0013.nii splited0005.nii
+cp splited0014.nii splited0006.nii
+cp splited0015.nii splited0007.nii
 
 fslmerge -t Basis_0a.nii splited*
 
@@ -32,10 +36,14 @@ rm splited*
 
 fslsplit ./Basis_0b.nii splited 
 
-cp splited0004.nii splited0000.nii
-cp splited0005.nii splited0001.nii
-cp splited0006.nii splited0002.nii
-cp splited0007.nii splited0003.nii
+cp splited0008.nii splited0000.nii
+cp splited0009.nii splited0001.nii
+cp splited0010.nii splited0002.nii
+cp splited0011.nii splited0003.nii
+cp splited0012.nii splited0004.nii
+cp splited0013.nii splited0005.nii
+cp splited0014.nii splited0006.nii
+cp splited0015.nii splited0007.nii
 
 fslmerge -t Basis_0b.nii splited*
 
