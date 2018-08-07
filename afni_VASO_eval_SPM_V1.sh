@@ -46,11 +46,11 @@ rm combined.nii
   NumVol=`3dinfo -nv BOLD.nii`
   
   ### This is how i did it until Aug 1st 2018. 
-  3dcalc -prefix tmp.VASO_othervols.nii \
-         -a      BOLD.nii'[0..'`expr $NumVol - 2`']' \
-         -b      BOLD.nii'[1..$]' \
-         -c      Nulled.nii'[1..$]' \
-         -expr 'c*2/(a+b)' -overwrite
+  #3dcalc -prefix tmp.VASO_othervols.nii \
+  #       -a      BOLD.nii'[0..'`expr $NumVol - 2`']' \
+  #       -b      BOLD.nii'[1..$]' \
+  #       -c      Nulled.nii'[1..$]' \
+  #       -expr 'c*2/(a+b)' -overwrite
   
   
   ### This is how i do it since Aug 1st 2018. 
@@ -61,13 +61,13 @@ rm combined.nii
    #      -d      Nulled.nii'[0..'`expr $NumVol - 3`']' \
    #      -expr '(0.5*c+0.5*d)/(1.0*a+0.0*b)' -overwrite      
  
-   ### This is how is semms best in noisy V1 data. 
-   #  3dcalc -prefix tmp.VASO_othervols.nii \
-   #      -a      BOLD.nii'[2..$]' \
-   #      -b      BOLD.nii'[1..'`expr $NumVol - 2`']' \
-   #      -c      Nulled.nii'[1..'`expr $NumVol - 2`']' \
-   #      -d      Nulled.nii'[0..'`expr $NumVol - 3`']' \
-   #      -expr '(0.5*c+0.5*d)/(1.0*a+0.0*b)' -overwrite  
+   ### This is how is seems best in noisy V1 data. 
+     3dcalc -prefix tmp.VASO_othervols.nii \
+         -a      BOLD.nii'[2..$]' \
+         -b      BOLD.nii'[1..'`expr $NumVol - 2`']' \
+         -c      Nulled.nii'[1..'`expr $NumVol - 2`']' \
+         -d      Nulled.nii'[0..'`expr $NumVol - 3`']' \
+         -expr '(0.5*c+0.5*d)/(1.0*a+0.0*b)' -overwrite  
  
    # concatinate the first VASO volume with the rest of the sequence
    3dTcat -overwrite -prefix VASO.nii tmp.VASO_vol1.nii tmp.VASO_othervols.nii tmp.VASO_vollast.nii
