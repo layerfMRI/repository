@@ -15,4 +15,6 @@ mv muncorr.nii bico_$1
 
 rm uncorr.nii
 
+rm c*uncorr.nii
+
 echo "und tschuess"
