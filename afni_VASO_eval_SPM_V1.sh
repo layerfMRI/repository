@@ -5,13 +5,17 @@ echo "It starts now:    I expect two files Not_Nulled_Basis_a.nii and Nulled_Bas
  
 
 
-NumVol=`3dinfo -nv Nulled_Basis_b.nii`
-3dcalc -a Nulled_Basis_b.nii'[3..$]' -b  Not_Nulled_Basis_a.nii'[3..'`expr $NumVol - 1`']' -expr 'a+b' -prefix combined.nii -overwrite
+#3dMean -overwrite -prefix Nulled_Basis_b.nii Nulled_Basis_0b.nii Nulled_Basis_2b.nii Nulled_Basis_4b.nii 
+#3dMean -overwrite -prefix Not_Nulled_Basis_a.nii Not_Nulled_Basis_0a.nii Not_Nulled_Basis_2a.nii Not_Nulled_Basis_4a.nii 
+
+
+NumVol=`3dinfo -nv Nulled_Basis_0b.nii`
+3dcalc -a Nulled_Basis_b.nii'[3..'`expr $NumVol - 2`']' -b  Not_Nulled_Basis_a.nii'[3..'`expr $NumVol - 2`']' -expr 'a+b' -prefix combined.nii -overwrite
 3dTstat -cvarinv -prefix T1_weighted.nii -overwrite combined.nii 
 rm combined.nii
 
 3dcalc -a Nulled_Basis_b.nii'[1..$(2)]' -expr 'a' -prefix Nulled.nii -overwrite
-3dcalc -a Not_Nulled_Basis_a.nii'[2..$(2)]' -expr 'a' -prefix BOLD.nii -overwrite
+3dcalc -a Not_Nulled_Basis_a.nii'[0..$(2)]' -expr 'a' -prefix BOLD.nii -overwrite
 
 3drefit -space ORIG -view orig -TR 3 BOLD.nii
 3drefit -space ORIG -view orig -TR 3 Nulled.nii
@@ -19,83 +23,47 @@ rm combined.nii
 3dTstat -mean -prefix mean_nulled.nii Nulled.nii -overwrite
 3dTstat -mean -prefix mean_notnulled.nii BOLD.nii -overwrite
 
+3dUpsample -overwrite  -datum short -prefix Nulled_intemp.nii -n 2 -input Nulled.nii
+3dUpsample -overwrite  -datum short -prefix BOLD_intemp.nii   -n 2 -input   BOLD.nii
 
-# Then calculate the mean, stdev, & cvarinv (detrended mean/stdev) for BOLD & Nulled volumes
-# I was mainly doing this as a check to make sure motion correction worked reasonably.
-# A TSNR calculation should probably be done after non-linear drift removal.
+NumVol=`3dinfo -nv BOLD_intemp.nii`
 
-# Calculate VASO!
+3dTcat -overwrite -prefix Nulled_intemp.nii Nulled_intemp.nii'[0]' Nulled_intemp.nii'[0..'`expr $NumVol - 2`']' 
 
-
-  # The first vaso volume is first nulled volume divided by the 2nd BOLD volume
-  3dcalc -prefix tmp.VASO_vol1.nii \
-         -a      BOLD.nii'[1]' \
-         -b      Nulled.nii'[0]' \
-         -expr 'b/a' -overwrite
+## you only ned this is the first image is a VASO image
+#  3dcalc -prefix tmp.VASO_vol1.nii \
+#         -a      Nulled_intemp.nii'[0]' \
+#         -b      BOLD_intemp.nii'[0]' \
+#         -expr '(a/b-step(a/b-2)*(a/b-1))*step(a/b)' -overwrite
          
-  3dcalc -prefix tmp.VASO_vollast.nii \
-         -a      BOLD.nii'[$]' \
-         -b      Nulled.nii'[$]' \
-         -expr 'b/a' -overwrite
+#  3dcalc -prefix tmp.VASO_vollast.nii \
+#         -b      Nulled_intemp.nii'[$]' \
+#         -a      BOLD_intemp.nii'[$]' \
+#         -expr 'b/a' -overwrite
 
 
-  # Calculate all VASO volumes after the first one
-  # -a goes from the 2nd BOLD volume to the 2nd-to-last BOLD volume
-  # -b goes from the 3rd BOLD volume to the last BOLD volume
-  # -c goes from the 2nd Nulled volume to the last Nulled volume
-  NumVol=`3dinfo -nv BOLD.nii`
+
+#  3dcalc -prefix tmp.VASO_othervols.nii \
+#         -b      BOLD_intemp.nii'[1..$]' \
+#         -a      Nulled_intemp.nii'[0..'`expr $NumVol - 2`']' \
+#         -expr '(a/b-step(a/b-2)*(a/b-1))*step(a/b)' -overwrite
   
-  ### This is how i did it until Aug 1st 2018. 
-  #3dcalc -prefix tmp.VASO_othervols.nii \
-  #       -a      BOLD.nii'[0..'`expr $NumVol - 2`']' \
-  #       -b      BOLD.nii'[1..$]' \
-  #       -c      Nulled.nii'[1..$]' \
-  #       -expr 'c*2/(a+b)' -overwrite
-  
-  
-  ### This is how i do it since Aug 1st 2018. 
-   #  3dcalc -prefix tmp.VASO_othervols.nii \
-   #      -a      BOLD.nii'[2..$]' \
-   #      -b      BOLD.nii'[1..'`expr $NumVol - 2`']' \
-   #      -c      Nulled.nii'[1..'`expr $NumVol - 2`']' \
-   #      -d      Nulled.nii'[0..'`expr $NumVol - 3`']' \
-   #      -expr '(0.5*c+0.5*d)/(1.0*a+0.0*b)' -overwrite      
- 
-   ### This is how is seems best in noisy V1 data. 
-     3dcalc -prefix tmp.VASO_othervols.nii \
-         -a      BOLD.nii'[2..$]' \
-         -b      BOLD.nii'[1..'`expr $NumVol - 2`']' \
-         -c      Nulled.nii'[1..'`expr $NumVol - 2`']' \
-         -d      Nulled.nii'[0..'`expr $NumVol - 3`']' \
-         -expr '(0.5*c+0.5*d)/(1.0*a+0.0*b)' -overwrite  
- 
-   # concatinate the first VASO volume with the rest of the sequence
-   3dTcat -overwrite -prefix VASO.nii tmp.VASO_vol1.nii tmp.VASO_othervols.nii tmp.VASO_vollast.nii
+# 3dTcat -overwrite -prefix VASO_intemp.nii tmp.VASO_vol1.nii tmp.VASO_othervols.nii 
+#rm tmp.VASO_vol1*.nii tmp.VASO_othervols*.nii tmp.VASO_vollast.nii
 
-
-# Remove the temporary seprate files for the first VASO volume and the rest of the VASO volumes
-rm tmp.VASO_vol1*.nii tmp.VASO_othervols*.nii tmp.VASO_vollast.nii
-
-
-# BOLD and VASO now have 3s or 312s TRs
-# Use 3drefit to make this change in the file headers
-
- 
-#echo ' remove last time point in BOLD'
-#NumVol=`3dinfo -nv BOLD.nii`
-#echo "NumVol of BOLD is '$Numvol'  "
-#3dcalc -prefix BOLD.nii \
-#         -a      BOLD.nii'[1..'`expr $NumVol - 1`']' \
-#         -expr 'a' -overwrite
+LN_BOCO -Nulled Nulled_intemp.nii -BOLD BOLD_intemp.nii 
 
   3dTstat  -overwrite -mean  -prefix BOLD.Mean.nii \
-     BOLD.nii'[1..$]'
+     BOLD_intemp.nii'[1..$]'
   3dTstat  -overwrite -cvarinv  -prefix BOLD.tSNR.nii \
-     BOLD.nii'[1..$]'
+     BOLD_intemp.nii'[1..$]'
   3dTstat  -overwrite -mean  -prefix VASO.Mean.nii \
-     VASO.nii'[1..$]'
+     VASO_LN.nii'[1..$]'
   3dTstat  -overwrite -cvarinv  -prefix VASO.tSNR.nii \
-     VASO.nii'[1..$]'
+     VASO_LN.nii'[1..$]'
 
 
+start_bias_field.sh T1_weighted.nii
+
+echo "und tschuess"
 
