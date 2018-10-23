@@ -12,8 +12,8 @@ rm combined.nii
 3dcalc -a Nulled_Basis_b.nii'[1..$(2)]' -expr 'a' -prefix Nulled.nii -overwrite
 3dcalc -a Not_Nulled_Basis_a.nii'[0..$(2)]' -expr 'a' -prefix BOLD.nii -overwrite
 
-3drefit -space ORIG -view orig -TR 3 BOLD.nii
-3drefit -space ORIG -view orig -TR 3 Nulled.nii
+3drefit -space ORIG -view orig -TR 5 BOLD.nii
+3drefit -space ORIG -view orig -TR 5 Nulled.nii
 
 3dTstat -mean -prefix mean_nulled.nii Nulled.nii -overwrite
 3dTstat -mean -prefix mean_notnulled.nii BOLD.nii -overwrite
