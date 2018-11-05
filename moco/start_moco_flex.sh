@@ -1,4 +1,3 @@
-echo "start"
 #!/bin/bash
 
 cnt=0
