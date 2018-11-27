@@ -57,6 +57,8 @@ LN_BOCO -Nulled Nulled_intemp.nii -BOLD BOLD_intemp.nii
   3dTstat  -overwrite -cvarinv  -prefix VASO.tSNR.nii \
      VASO_LN.nii'[1..$]'
 
+LN_SKEW -timeseries BOLD.nii
+LN_SKEW -timeseries VASO_LN.nii
 
 start_bias_field.sh T1_weighted.nii
 
