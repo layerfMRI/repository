@@ -2,7 +2,9 @@
 
 
 echo "It starts now:    I expect two files Not_Nulled_Basis_a.nii and Nulled_Basis_b.nii that are motion corrected with SPM"
- 
+
+3dMean -prefix Nulled_Basis_b.nii Nulled_Basis_*b.nii
+3dMean -prefix Not_Nulled_Basis_a.nii Not_Nulled_Basis_*a.nii 
 
 NumVol=`3dinfo -nv Nulled_Basis_b.nii`
 3dcalc -a Nulled_Basis_b.nii'[3..'`expr $NumVol - 2`']' -b  Not_Nulled_Basis_a.nii'[3..'`expr $NumVol - 2`']' -expr 'a+b' -prefix combined.nii -overwrite
@@ -60,6 +62,12 @@ LN_BOCO -Nulled Nulled_intemp.nii -BOLD BOLD_intemp.nii
 LN_SKEW -timeseries BOLD.nii
 LN_SKEW -timeseries VASO_LN.nii
 
+3dMean -prefix Nulled_Basis_b.nii Nulled_Basis_*b.nii
+3dMean -prefix Not_Nulled_Basis_a.nii Not_Nulled_Basis_*a.nii
+
 start_bias_field.sh T1_weighted.nii
+
+3drefit -TR 2.5 BOLD_intemp.nii
+3drefit -TR 2.5 VASO_LN.nii
 
 echo "und tschuess"
