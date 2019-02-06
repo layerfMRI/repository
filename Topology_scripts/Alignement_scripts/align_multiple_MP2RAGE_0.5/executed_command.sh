@@ -24,8 +24,10 @@ antsRegistration \
 --metric CC[ref.nii,s1.nii,1,4]  \
 --convergence [100x100x70x50x20,1e-6,10]  \
 --shrink-factors 10x6x4x2x1  \
---smoothing-sigmas 5x3x2x1x0vox  \
--x mask.nii
+--smoothing-sigmas 5x3x2x1x0vox 
+
+# \
+#-x mask.nii
 
 antsRegistration  \
 --verbose 1  \
@@ -50,7 +52,8 @@ antsRegistration  \
 --metric CC[ref.nii,s3.nii,1,4]  \
 --convergence [100x100x70x50x20,1e-6,10]  \
 --shrink-factors 10x6x4x2x1  \
---smoothing-sigmas 5x3x2x1x0vox  \
--x mask.nii
+--smoothing-sigmas 5x3x2x1x0vox 
+# \
+#-x mask.nii
 
 3dMean -prefix MP2RAGE_0.5.nii ref.nii registered3_Warped.nii.gz registered1_Warped.nii.gz
