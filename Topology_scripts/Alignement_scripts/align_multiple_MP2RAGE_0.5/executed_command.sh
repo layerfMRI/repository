@@ -1,7 +1,6 @@
 #!/bin/bash
 
 antsRegistration \
---verbose 1 \
 --dimensionality 3  \
 --float 0  \
 --collapse-output-transforms 1  \
@@ -30,7 +29,6 @@ antsRegistration \
 #-x mask.nii
 
 antsRegistration  \
---verbose 1  \
 --dimensionality 3  \
 --float 0  \
 --collapse-output-transforms 1  \
