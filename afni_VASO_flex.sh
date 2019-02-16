@@ -56,8 +56,8 @@ LN_BOCO -Nulled Nulled_intemp.nii -BOLD BOLD_intemp.nii
   3dTstat  -overwrite -cvarinv  -prefix VASO.tSNR.nii \
      VASO_LN.nii'[1..$]'
 
-LN_SKEW -timeseries BOLD.nii
-LN_SKEW -timeseries VASO_LN.nii
+#LN_SKEW -timeseries BOLD.nii
+#LN_SKEW -timeseries VASO_LN.nii
 
 3dMean -prefix Nulled_Basis_b.nii Nulled_Basis_*b.nii
 3dMean -prefix Not_Nulled_Basis_a.nii Not_Nulled_Basis_*a.nii

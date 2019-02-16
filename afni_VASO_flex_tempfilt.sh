@@ -1,14 +1,9 @@
 #!/bin/bash
 
 
-echo "It starts now:    I expect six files Not_Nulled_Basis_0-2a.nii and Nulled_Basis_0-2b.nii that are motion corrected with SPM"
- 
+echo "It starts now:    I expect two files Not_Nulled_Basis_a.nii and Nulled_Basis_b.nii that are motion corrected with SPM"
 
-3dMean -overwrite -prefix Nulled_Basis_b.nii Nulled_Basis_0b.nii Nulled_Basis_1b.nii Nulled_Basis_2b.nii 
-3dMean -overwrite -prefix Not_Nulled_Basis_a.nii Not_Nulled_Basis_0a.nii Not_Nulled_Basis_1a.nii Not_Nulled_Basis_2a.nii 
-
-
-NumVol=`3dinfo -nv Nulled_Basis_0b.nii`
+NumVol=`3dinfo -nv Nulled_Basis_b.nii`
 3dcalc -a Nulled_Basis_b.nii'[3..'`expr $NumVol - 2`']' -b  Not_Nulled_Basis_a.nii'[3..'`expr $NumVol - 2`']' -expr 'a+b' -prefix combined.nii -overwrite
 3dTstat -cvarinv -prefix T1_weighted.nii -overwrite combined.nii 
 rm combined.nii
@@ -16,8 +11,8 @@ rm combined.nii
 3dcalc -a Nulled_Basis_b.nii'[1..$(2)]' -expr 'a' -prefix Nulled.nii -overwrite
 3dcalc -a Not_Nulled_Basis_a.nii'[0..$(2)]' -expr 'a' -prefix BOLD.nii -overwrite
 
-3drefit -space ORIG -view orig -TR 3 BOLD.nii
-3drefit -space ORIG -view orig -TR 3 Nulled.nii
+3drefit -space ORIG -view orig -TR 5 BOLD.nii
+3drefit -space ORIG -view orig -TR 5 Nulled.nii
 
 3dTstat -mean -prefix mean_nulled.nii Nulled.nii -overwrite
 3dTstat -mean -prefix mean_notnulled.nii BOLD.nii -overwrite
@@ -50,6 +45,13 @@ NumVol=`3dinfo -nv BOLD_intemp.nii`
 # 3dTcat -overwrite -prefix VASO_intemp.nii tmp.VASO_vol1.nii tmp.VASO_othervols.nii 
 #rm tmp.VASO_vol1*.nii tmp.VASO_othervols*.nii tmp.VASO_vollast.nii
 
+
+LN_GRADSMOOTH -gradfile new_T1.nii -input Nulled_intemp.nii -FWHM 1 -within -selectivity 0.08
+mv smoothed_Nulled_intemp.nii Nulled_intemp.nii 
+
+LN_GRADSMOOTH -gradfile new_T1.nii -input BOLD_intemp.nii -FWHM 1 -within -selectivity 0.08
+mv smoothed_BOLD_intemp.nii BOLD_intemp.nii
+
 LN_BOCO -Nulled Nulled_intemp.nii -BOLD BOLD_intemp.nii 
 
   3dTstat  -overwrite -mean  -prefix BOLD.Mean.nii \
@@ -57,11 +59,19 @@ LN_BOCO -Nulled Nulled_intemp.nii -BOLD BOLD_intemp.nii
   3dTstat  -overwrite -cvarinv  -prefix BOLD.tSNR.nii \
      BOLD_intemp.nii'[1..$]'
   3dTstat  -overwrite -mean  -prefix VASO.Mean.nii \
-     VASO_intemp.nii'[1..$]'
+     VASO_LN.nii'[1..$]'
   3dTstat  -overwrite -cvarinv  -prefix VASO.tSNR.nii \
-     VASO_intemp.nii'[1..$]'
+     VASO_LN.nii'[1..$]'
 
+#LN_SKEW -timeseries BOLD.nii
+#LN_SKEW -timeseries VASO_LN.nii
+
+3dMean -prefix Nulled_Basis_b.nii Nulled_Basis_*b.nii
+3dMean -prefix Not_Nulled_Basis_a.nii Not_Nulled_Basis_*a.nii
 
 start_bias_field.sh T1_weighted.nii
+
+3drefit -TR 2.5 BOLD_intemp.nii
+3drefit -TR 2.5 VASO_LN.nii
 
 echo "und tschuess"
