@@ -1,5 +1,5 @@
  
-set terminal x11 enhanced 40
+set terminal qt enhanced 40
 #set terminal postscript enhanced color solid "Helvetica" 25
 #set out "thickness.ps"
 
@@ -23,5 +23,5 @@ plot 	"layer_norm.dat" u 1:($2) w lines title "tissue type 1"  linewidth 2 linec
 
 #plot deltaw(x) title "deltaW" linewidth 2
 
-set term x11
+set term qt
 exit

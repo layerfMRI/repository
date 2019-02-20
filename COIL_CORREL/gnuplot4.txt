@@ -1,5 +1,5 @@
 #aufrufen mit load "./gnuplot.txt"
-#set terminal x11 enhanced 40 
+#set terminal qt enhanced 40 
 
 
 #set terminal postscript enhanced color solid "Helvetica" 10
@@ -33,5 +33,5 @@ set zrange [-0.4:0.6]
 
 splot "coil_gnuplot.dat" 
 
-set term x11
+set term qt
 exit

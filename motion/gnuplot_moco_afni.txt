@@ -1,7 +1,7 @@
 #aufrufen mit load "./gnuplot.txt"
 
 
-#set terminal x11 enhanced 40
+#set terminal qt enhanced 40
 set terminal postscript enhanced color solid  "Helvetica" 10
 
 set out "motion.ps"
@@ -29,7 +29,7 @@ plot 	"BOLD.mot.1D" u 0:4  with lines  title "Not_nulled x"  linecolor rgb "gree
 
 #replot "plochsim_5_ohne.csv" using 1 with lines title "with eddy currents and  {/Symbol t} = 0.2 ms" linecolor rgb "blue"
 
-set term x11
+set term qt
 exit
 
 

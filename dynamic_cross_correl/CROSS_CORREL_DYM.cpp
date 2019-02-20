@@ -240,7 +240,7 @@ double cross_correl_norm[numb_layers][numb_layers] ;
 
 
 // Parameters for dynamic cross correlation matrix
-int lenght_ocorrelinter = 50; // in TR
+int lenght_ocorrelinter = 100; // in TR
 int interval_between_correlPeriods = 5; //in TR 
 int numb_ocorrels = (nrep - lenght_ocorrelinter)/interval_between_correlPeriods;
 int running_intex = 0;

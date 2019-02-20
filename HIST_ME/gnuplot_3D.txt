@@ -1,5 +1,5 @@
 #aufrufen mit load "./gnuplot.txt"
-set terminal x11 enhanced 40 
+set terminal qt enhanced 40 
 
 
 #set terminal postscript enhanced color solid "Helvetica" 10
@@ -33,5 +33,5 @@ splot "3dhist.dat" with pm3d
 #splot "3dhist_M_Vasa_31.dat" with pm3d 
 #splot "3dhist_M_Vasa.dat" with pm3d 
 
-set term x11
+set term qt
 exit

@@ -74,7 +74,7 @@ In the following directions, replace MCR_ROOT by the directory where the MATLAB 
 
 (1) Set the environment variable XAPPLRESDIR to this value:
 
-    MCR_ROOT/v91/X11/app-defaults
+    MCR_ROOT/v91/qt/app-defaults
 
 
 (2) If the environment variable LD_LIBRARY_PATH is undefined, set it to the concatenation 
