@@ -1,0 +1,45 @@
+#aufrufen mit load "./gnuplot.txt"
+set terminal x11 enhanced 40 
+
+set terminal postscript enhanced color solid "Helvetica" 10
+set out "VASO_layer_timecourses.ps"
+
+#set y2tics autofreq
+
+set title "BOLD and VASO time courses"  font "Helvetica,30"
+set ylabel "normalized signal"  font "Helvetica,20"
+#set y2label "normalized partial pressure" font "Helvetica,20"
+set xlabel "time in s" font "Helvetica,20"
+set xrange [-.1:130]
+#set yrange [0.994:1.02]
+#set y2range [-3:2.5]
+
+set size ratio 0.35
+#set grid
+#set ytics ("0" 0 , "1" 1, "-1" -1) 
+#set xtics (  "{/Symbol D} T" -85.37  , "-60.98" -60.98,  "-36.59" -36.59,  "-12.2" -12.2, "0" 0, "12.2" 12.2,  "36.59" 36.59,  "60.98" 60.98, "85.37" 85.37 )
+
+#et size 1.5
+
+
+set palette model CMY rgbformulae 7,5,15
+
+plot "t_course_4-6.dat" u 1:3:(0.1) smooth acsplines  title "1-3"  linecolor rgbcolor "#190707"  ,\
+     "t_course_7-9.dat" u 1:3:(0.1) smooth acsplines  title "4-6"  linecolor rgbcolor "#8A0808"  ,\
+     "t_course_10-12.dat" u 1:3:(0.1) smooth acsplines title "7-9"  linecolor rgbcolor "#FF0000"  ,\
+     "t_course_4-6.dat"    u 1:3 with points title ""  linecolor rgbcolor "#190707" ,\
+     "t_course_7-9.dat"   u 1:3 with points  title ""  linecolor rgbcolor "#8A0808"  ,\
+     "t_course_10-12.dat" u 1:3 with points  title ""  linecolor rgbcolor "#FF0000"  ,\
+      x/x with lines linecolor rgb "black" title "baseline" 
+
+#     "t_course_13-15.dat"  u 1:3:(0.5) smooth acsplines title "10-12"  linecolor rgbcolor "#FFBF00"  ,\
+#"t_course_1-3.dat" u 1:3 with lines title "upper"  linecolor rgbcolor "#190707"  ,\
+
+# "t_course.dat" u 2:4:6 with yerrorbars title ""  linecolor rgb "blue" 
+#"data.dat"  using 1:3 axes x1y1 title "VASO signal (data points)"  linecolor rgb "red" 
+
+#replot "plochsim_5_ohne.csv" using 1 with lines title "with eddy currents and tau = 0.2 ms" linecolor rgb "blue"
+
+
+set term x11
+exit

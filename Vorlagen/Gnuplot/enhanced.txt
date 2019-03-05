@@ -1,0 +1,35 @@
+#aufrufen mit load "./gnuplot.txt"
+
+
+#set terminal x11 enhanced 40
+set terminal postscript enhanced color solid  "Helvetica" 10
+
+set out "t2.ps"
+
+set key left bottom # für Position of Legend
+
+
+set title "B_{eff} during inversion"   font "Helvetica,30"
+set ylabel "B_{z eff}"  font "Helvetica,30"
+set xlabel "|B_{1}|"  font "Helvetica,30"
+set xrange [-.1:1.2]
+set yrange [-100:100]
+set size ratio 1.3
+#set grid
+#set ytics ("0" 0 , "1" 1, "-1" -1) 
+#set xtics (  "{/Symbol D} T" -85.37  , "-60.98" -60.98,  "-36.59" -36.59,  "-12.2" -12.2, "0" 0, "12.2" 12.2,  "36.59" 36.59,  "60.98" 60.98, "85.37" 85.37 )
+
+
+plot "T2inf.dat"  with lines  title "B_{eff} "  #linecolor rgb "green"
+#replot "T2_30ms.dat"  with lines  title "B_{eff} trajectory, T_{2} = 30 ms" #linecolor rgb "green"
+
+
+#replot "plochsim_5_ohne.csv" using 1 with lines title "with eddy currents and  {/Symbol t} = 0.2 ms" linecolor rgb "blue"
+
+
+set term x11
+exit
+
+
+
+#-----------------> Dimo : des Enhanced in Zeile 5  ist wichtig. My kannst du dann mit {/Symbol m} schreiben

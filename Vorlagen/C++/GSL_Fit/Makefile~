@@ -1,0 +1,13 @@
+CXX=g++
+CXXFLAGS=-I/usr/include/gsl
+LDFLAGS= -lgsl -lgslblasnative
+PROGS= test
+  
+
+all: $(PROGS)
+
+
+
+
+clean:
+	rm -f $(PROGS)

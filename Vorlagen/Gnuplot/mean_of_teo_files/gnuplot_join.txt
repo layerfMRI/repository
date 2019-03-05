@@ -1,0 +1,39 @@
+#aufrufen mit load "./gnuplot.txt"
+#set terminal x11 enhanced 40 
+
+#set terminal postscript enhanced color solid "Helvetica" 20
+#set out "VASO.ps"
+
+#set y2tics autofreq
+
+set title ""  font "Helvetica,30"
+set ylabel "CBV change in %"  font "Helvetica,20"
+#set y2label "normalized partial pressure" font "Helvetica,20"
+set xlabel "time in s" font "Helvetica,20"
+set xrange [-10.:61]
+#set yrange [0.98:1.005]
+#set y2range [-3:2.5]
+
+set size ratio 0.8
+set grid
+#set ytics ("0" 0 , "1" 1, "-1" -1) 
+#set xtics (  "{/Symbol D} T" -85.37  , "-60.98" -60.98,  "-36.59" -36.59,  "-12.2" -12.2, "0" 0, "12.2" 12.2,  "36.59" 36.59,  "60.98" 60.98, "85.37" 85.37 )
+
+#et size 1.5
+
+plot 	"data_0_0.dat" u 1:($3-1.)/-0.055*100.:(1) smooth acsplines title "CBV change in positive ROI"  linecolor rgb "pink" lw 1 ,\
+	"data_0_0.dat" u 1:($3-1.)/-0.055*100:($5)/-0.055*100 with yerrorbars title ""  linecolor rgb "pink",\
+	"data_0_3.dat" u 1:($3-1.)/-0.055*100:(5) smooth acsplines title "CBV change in negative ROI"  linecolor rgb "green" lw 1 ,\
+	"data_0_3.dat" u 1:($3-1.)/-0.055*100:($5/1.6)/-0.055*100 with yerrorbars title ""  linecolor rgb "green",\
+	 '<join data_3_3.dat data_0_3.dat' using 1:((($3)+($8))/2.-1.)/-0.055*100 ,\
+	"data_3_3.dat" u 1:($3-1.)/-0.055*100:(5) smooth acsplines title "CBV change in negative ROI"  linecolor rgb "red" lw 1 ,\
+0.*x with lines title "" linecolor rgb "black"
+#set term x11
+exit
+
+#"data.dat" u 1:($3):5 with yerrorbars title ""  linecolor rgb "red" ,\
+#"data.dat" u 2:($4):6 with yerrorbars title ""  linecolor rgb "blue",\
+
+
+#"mean_0_2.dat" u 1:($3):(1) smooth acsplines title "VASO deep"  linecolor rgb "grey" ,\
+#"mean_0_2.dat" u 2:($4):(1) smooth acsplines title "BOLD deep"  linecolor rgb "green",\

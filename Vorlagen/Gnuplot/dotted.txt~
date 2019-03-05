@@ -1,0 +1,66 @@
+#set terminal postscript color solid
+#set term postscript eps enhanced
+
+set terminal x11 enhanced 40
+set terminal postscript enhanced color "Helvetica" 15
+set out "both.ps"
+
+set title "M_{z}(TI)"  font"Helvetica,20"
+set ylabel "M_{z}(TI)"  font"Helvetica,20"
+set xlabel "TR in s"
+set xrange [1500.:5000.]
+set yrange [-0.2:0.6]
+set grid 
+set xtics ( "1.5" 1500, "2.0" 2000, "2.5" 2500 , "3.0" 3000 , "3.5" 3500 ,  "4" 4000,  "4.5" 4500, "5.0" 5000) 
+set ytics (  "-0.1 M_{0}" -0.1, "0 M_{0}" 0, "0.1 M_{0}" .1 ,  "0.2 M_{0}" 0.20, "0.3 M_{0}" 0.30,  "0.4 M_{0}" 0.40,  "0.5 M_{0}" 0.5)
+T1B = 2212.
+T1GM = 1900
+T1CSF = 5500
+
+TI (x) = T1B*(log(2)-log(1+exp(-x/T1B)))
+
+#CSF
+Mz_CSF(x) = 1-2*exp(-TI(x)/T1CSF)+exp(-x/T1CSF)
+
+
+# Graue Masse
+Mz_GM(x) = 1-2*exp(-TI(x)/T1GM)+exp(-x/T1GM)
+
+set size ratio 0.35
+
+set sample 1000
+
+
+T1B1 = 2212.
+T1GM1 = 1900
+T1CSF1 = 5500
+
+TI1 (x) = T1B1*log(2)
+
+#CSF
+Mz_CSF1(x) = 1-2*exp(-TI1(x)/T1CSF1)+exp(-x/T1CSF1)
+
+
+# Graue Masse
+Mz_GM1(x) = 1-2*exp(-TI1(x)/T1GM1)+exp(-x/T1GM1)
+
+#set style line 3 lt 3 lw 3 pt 3
+#set style line 4 lt 2 lw 2 lc rgb "blue"
+
+
+
+
+plot  Mz_GM(x) title "GM" linewidth 2 lt 1 lc rgb "blue" ,\
+Mz_CSF(x) title "CSF" linewidth 2  lt 1 lc rgb "green" ,\
+Mz_GM1(x) title "GM" linewidth 2 lt 0 lc rgb "blue" ,\
+Mz_CSF1(x) title "CSF" linewidth 2 lt 2 lc rgb "green"  ,\
+0 title "blood" linewidth 2 lt 1 lc rgb "red"
+
+
+
+
+
+
+
+set term x11
+exit

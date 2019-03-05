@@ -1,0 +1,19 @@
+set terminal postscript color solid
+set out "verteilung.ps"
+
+
+set title "Verteilung" 0,0,0
+set xlabel "teta" 
+set ylabel "dk/dw" 
+
+bin_width = 0.09; ## edit this 
+bin_number(x) = floor(x/bin_width)
+rounded(x) = bin_width * ( bin_number(x) + 0.5 )
+UNITY = 1
+## column number of data to be histogrammed is here assumed to be 1
+## - change $1 to another column if desired
+plot [-4.:4.] 'data.dat' u (rounded($1)):(UNITY) t 'data' smooth frequency w histeps
+
+
+set term x11
+exit

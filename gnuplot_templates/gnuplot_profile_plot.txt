@@ -4,7 +4,7 @@
 # load "gnuplot_Lyer_me_single_TR.txt"
 
 
-set terminal x11 enhanced 40
+set terminal qt enhanced 40
 #set terminal postscript enhanced color solid "Helvetica" 25
 #set out "profile.ps"
 
@@ -16,5 +16,5 @@ plot 	"layer.dat" u 0:($1) w lines title "contrast type 1"  linewidth 3 linecolo
         "layer.dat" u 0:($1):($2)/sqrt($3-1) w yerrorbars title "" pt 1  linewidth 2 linecolor rgb "blue"  
 
 
-set term x11
+set term qt
 exit

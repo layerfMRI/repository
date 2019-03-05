@@ -1,0 +1,130 @@
+#!/bin/bash
+#
+# gnuplot movie creation script
+#
+# Renzo
+#
+# creates a set of png files from gnuplot,
+# and encodes them with mplayer.
+#
+# REQUIREMENTS:
+# mplayer, possibly libmp3lame if it bitches about encoding
+# run this program from the bash shell
+#
+#
+#
+echo "running gnuplot
+
+"
+count=1000;
+for ((inc = 4500; inc >= 10; inc = inc - 10)); 
+do
+count=`expr $count + 1`;
+echo "
+set isosample 100,100; 
+
+set title '$inc'; 
+set terminal png small ;
+set output '$count.png';
+
+
+Ti = 1.45561;
+Tr1 =  '$inc'/1000.;
+
+Tr2 = 7. - Tr1;
+set title 'TR-TI2 = $inc ms' ;
+set ylabel 'Mz ' ;
+set xlabel 'time';
+set xrange [0.:15.4];
+set yrange [-1:0.95];
+set grid ;
+set xtics 'Times-Roman', 2 ( 'TI1' Ti, 'TI2' Tr2 , 'TR' Tr1+Tr2,  'TR+TI1' Ti+Tr1+Tr2, 'TR+TI2' Tr2+Tr1+Tr2 , '2TR' Tr1+Tr2+Tr1+Tr2,  '2TR+TI1' Ti+Tr1+Tr2+Tr1+Tr2, '2TR+TI2' Tr2+Tr1+Tr2+Tr1+Tr2 , '3TR' Tr1+Tr2+Tr1+Tr2+Tr1+Tr2) ;
+set ytics ( '-M0' -1, '0' 0, 'M0' 0.95 ) ;
+
+T1csf = 5.;
+T1gm  = 1.9;
+T1b  = 2.1;
+
+l(x) = x < Ti ? 1-2*exp(-x/T1csf) \
+	: x <= Tr2 ? 1-exp((-x+Ti)/T1csf) \
+	: x <= Tr2+Tr1 ? 1-exp((-x+Tr2)/T1csf) \
+	: x <= Tr2+Tr1+Ti ? 1-exp((-x+Tr1+Tr2)/T1csf)*(1.-exp((-Tr1)/T1csf)+1.) \
+	: x <= Tr2+Tr2+Tr1 ? 1-exp((-x+Tr2+Tr1+Ti)/T1csf) \
+	: x <= Tr2+Tr2+Tr1+Tr1 ? 1-exp((-x+Tr2+Tr2+Tr1)/T1csf) \
+	: x <= Tr2+Tr2+Tr1+Tr1+Ti ? 1-exp((-x+Tr1+Tr2+Tr1+Tr2)/T1csf)*(1.-exp((-Tr1)/T1csf)+1.) \
+	: x <= Tr2+Tr2+Tr2+Tr1+Ti ? 1-exp((-x+Tr2+Tr2+Tr1+Tr1+Ti)/T1csf) \
+             : 0;
+
+
+f(x) = x < Ti ? 1-2*exp(-x/T1gm) \
+	: x <= Tr2 ? 1-exp((-x+Ti)/T1gm) \
+	: x <= Tr2+Tr1 ? 1-exp((-x+Tr2)/T1gm) \
+	: x <= Tr2+Tr1+Ti ? 1-exp((-x+Tr1+Tr2)/T1gm)*(1-exp((-Tr1)/T1gm)+1) \
+	: x <= Tr2+Tr2+Tr1 ? 1-exp((-x+Tr2+Tr1+Ti)/T1gm) \
+	: x <= Tr2+Tr2+Tr1+Tr1 ? 1-exp((-x+Tr2+Tr2+Tr1)/T1gm) \
+	: x <= Tr2+Tr2+Tr1+Tr1+Ti ? 1-exp((-x+Tr1+Tr2+Tr1+Tr2)/T1gm)*(1-exp((-Tr1)/T1gm)+1) \
+	: x <= Tr2+Tr2+Tr2+Tr1+Ti ? 1-exp((-x+Tr2+Tr2+Tr1+Tr1+Ti)/T1gm) \
+             : 0;
+
+T1 = T1b ;
+g(x) = x < Tr2 ? 1-2*exp(-x/T1) \
+	: x <= Tr1+Tr2 ? 1-exp(-(x-(Tr2))/T1) \
+	: x <= Tr1+Tr2+Tr2 ? 1-2*exp(-(x-(Tr1+Tr2))/T1) \
+	: x <= Tr1+Tr2+Tr1+Tr2 ? 1-exp(-(x-(Tr1+Tr2+Tr2))/T1) \
+	: x <= Tr1+Tr2+Tr1+Tr2+Tr2 ? 1-2*exp(-(x-(Tr1+Tr2+Tr1+Tr2))/T1) \
+	: x <= Tr1+Tr2+Tr1+Tr2+Tr2 ? 1-2*exp(-(x-4*Tr1)/T1) \
+             : 0;
+
+h1(x) =  1-2*exp(-x/T1);
+             
+h2(x) = 1-2*exp(-(x-(Tr1+Tr2))/T1);
+
+h3(x) = x <  Tr2+Tr1+Tr2+Tr1 ? -exp((-x+Tr1+Tr1+Tr1)/T1)*(1-((-exp((-Tr1+Tr1)/T1)*(1-(-(1-2*exp(-Tr1/T1))))+1)))+1 \
+             : 0;
+H(x)= (Tr2<x && x<=Tr1+Tr2 )? h1(x) :  \
+	(Tr2+Tr1+Tr2<x && x<=Tr2+Tr1+Tr2+Tr1)? h2(x): 1/0;
+
+
+G(x) = (0<x && x<=Tr1+Tr2 )? g(x) :  \
+	(Tr1+Tr2+0.01<x && x<=2*(Tr1+Tr2))? g(x): \
+	(2*(Tr1+Tr2)+0.01<x && x<=3*(Tr1+Tr2))? g(x): 1/0;
+
+set size ratio 0.5;
+
+set sample 11000;
+plot  l(x) title 'CSF in imaging slice' linewidth 1 lc rgb 'green' ,\
+ G(x) title 'once-inverted blood' linewidth 2 lc rgb 'red' ,\
+ f(x) title 'gray matter in imaging slice' linewidth 2 lc rgb 'blue' " | gnuplot;
+done
+
+#
+# Convert png to jpg
+#
+#echo "converting png images to jpg
+#
+#"
+#for i in `ls -1| grep png`;
+#do
+#convert $i $i.jpg;
+#done
+
+#
+# create movie (divx4) at 4 FPS
+#
+echo "creating movie output.avi out of the png files
+
+"
+
+mencoder "mf://*.png" -mf type=png:fps=18 -ovc lavc -o output.avi
+
+for i in `ls -1| grep png`;
+do
+rm $i
+done
+
+Noatun output.avi
+
+#
+# clean up extra files
+#
+#rm -Rf *.png *.jpg

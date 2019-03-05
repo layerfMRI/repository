@@ -1,0 +1,11 @@
+plot "temp16.dat" smooth csplines, "temp16.dat" with points
+replot "temp14.dat" smooth csplines, "temp14.dat" with points
+replot "temp12.dat" smooth csplines, "temp12.dat" with points
+replot "temp11.dat" smooth csplines, "temp11.dat" with points
+replot "temp11.dat" u 1:2:(1.0) smooth acsplines  title "Title"  linecolor rgb "orange" , "temp11.dat" with points
+
+
+replot "temp11.dat" unsing 1:2:(1.2) smooth acsplines
+
+
+#(je kleiner die letze Zahl, desto smoother wird geplottet) 

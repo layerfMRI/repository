@@ -1,0 +1,39 @@
+#set terminal postscript color solid
+
+set terminal postscript enhanced color solid "Times-Roman,30"
+set out "surface.ps"
+#set terminal enhanced 
+
+#set title "" 
+set ylabel "signal change in %" font "Times-Roman,30"
+#set xlabel "Zeit"
+set xrange [0.75:1.75]
+set yrange [0:7]
+
+set style line 1 lc rgb 'grey30' ps 0 lt 1 lw 2
+set style line 2 lc rgb 'grey70' lt 1 lw 2
+#set style fill solid 1.0 border rgb "grey30"
+
+#set label "*" at 3,0.8 center
+#set label "*" at 4,0.8 center
+#set border 3
+
+set pointsize 4
+set bar 4
+
+set size ratio 1.4
+
+set xtics ("BOLD" 1, "VASO" 1.5) font "Times-Roman,30"
+
+#set ytics nomirror out scale 0.75 0.5
+
+plot "data.dat" u 1:2:($3/3.612) with yerrorbars lt 2 linecolor rgb "black" title "all voxels" ,\
+ "data.dat" u 1:4:($5/3.612) with yerrorbars linecolor rgb "turquoise" title "surface"
+#     "data.dat" u 1:2:3 w yerrorbars linecolor rgb "red" title "" ,\
+#     "data.dat" u 1:4:5 w yerrorbars linecolor rgb "black"  title ""
+
+#plot  'data.dat' using 1:3 w lines
+
+
+set term x11
+exit

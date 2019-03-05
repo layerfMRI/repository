@@ -1,0 +1,42 @@
+#set terminal x11 enhanced 40
+set terminal postscript enhanced color solid  "Helvetica" 10
+
+set out "t2.ps"
+
+set key left top # für Position of Legend
+
+
+set title "B_{eff} during inversion"   font "Helvetica,30"
+
+
+set ylabel "B1" 
+set xlabel "Zeit"
+set xrange [-0.:1500.]
+set yrange [-1:1]
+
+Mt0 = -1
+M0 = 1
+T1 = 2000
+
+
+Mz(t) = -exp(-t/T1)*(M0 -Mt0) + M0
+
+fit Mz(x) "wasser.dat" using 2:1 via  T1, Mt0
+
+
+
+plot "wasser.dat" using 2:1 title "B=100%", Mz(x) title "Best-Fit Curve"
+
+set label 1 sprintf("M01= %3.4f",M01) at 0,2 font "arialbd,18"
+
+
+#set xtics ( "-1" -1, "w-1" w-1 ,  "0" 0, "1-w" 1-w  ,  "1" 1) 
+#set ytics ( "Amin" Amin, "c" c, "Amax" Amax, "0" 0 ) 
+#set sample 1000
+
+#G(x) title "Gradient" linewidth 2  ,\ 
+
+#plot deltaw(x) title "deltaW" linewidth 2
+
+set term x11
+exit

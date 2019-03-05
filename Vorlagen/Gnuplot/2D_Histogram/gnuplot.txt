@@ -1,0 +1,49 @@
+#aufrufen mit load "./gnuplot.txt"
+set terminal x11 enhanced 40 
+
+#set terminal postscript enhanced color solid "Helvetica" 10
+#set out "VASO_BOLD_hist.ps"
+
+
+
+
+# set width of single bins in histogram
+set boxwidth 0.9*binwidth
+# set fill style of bins
+set style fill solid 0.5
+# define macro for plotting the histogram
+hist = 'u (binwidth*(floor(($1-binstart)/binwidth)+0.5)+binstart):(1.0) smooth freq w boxes'
+
+
+
+
+
+
+
+#set pm3d map
+#set hidden3d
+
+#set y2tics autofreq
+
+#set title "Distribution of {/Symbol D}CBV vs. {/Symbol D}BOLD"  font "Helvetica,30"
+#set ylabel "relative signal change of {/Symbol D}BOLD  "  font "Helvetica,20"
+#set y2label "normalized partial pressure" font "Helvetica,20"
+set xlabel "relative signal change of {/Symbol D}CBV " font "Helvetica,20"
+#set xrange [-.1:61]
+#set yrange [0.994:1.02]
+#set y2range [-3:2.5]
+
+#set size ratio 0.35
+#set grid
+#set ytics ("0" 0 , "1" 1, "-1" -1) 
+#set xtics (  "{/Symbol D} T" -85.37  , "-60.98" -60.98,  "-36.59" -36.59,  "-12.2" -12.2, "0" 0, "12.2" 12.2,  "36.59" 36.59,  "60.98" 60.98, "85.37" 85.37 )
+#set size 1.5
+
+#set ticslevel 0.0001
+
+
+#splot "VASO_BOLD_hist.dat" 
+
+
+set term x11
+exit
