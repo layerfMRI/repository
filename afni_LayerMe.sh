@@ -12,3 +12,4 @@ WRD=$(head -n 1 layer_t.dat|wc -w); for((i=2;i<=$WRD;i=i+2)); do awk '{print $'$
 
 
  
+1dplot -sepscl layer.dat 
