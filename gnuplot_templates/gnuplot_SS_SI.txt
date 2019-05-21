@@ -1,0 +1,112 @@
+# execute this in you terminal with 
+# "gnuplot"
+# load "gnuplot_SS_SI.txt"
+
+set terminal qt enhanced 40 
+#set terminal postscript enhanced color solid "Helvetica,15"
+#set out "MZ_CSF_110.ps"
+
+#set term latex
+
+
+#set tic scale 6 
+#set size ratio 0.2
+
+
+T1csf =  4.0
+T1gm  = 1.9
+T1b  = 2.212
+T1wm = 1.2
+k = 0.90
+Ti = T1b * log(1.+k)
+Tr = 1.8
+
+set title " during in SS-SI VASO for variable flip angle and inversion efficiency " font "Helvetica,22"
+angle = 2.*3.141596 * 120. / 360.
+
+set ylabel "M_{z}(t) " font "Helvetica,18"
+set xlabel "time" font "Helvetica,18"
+set xrange [0.:5*Tr-0.06]
+set yrange [-1:1]
+set grid 
+set xtics "Times-Roman", 2 ( "TI1" Ti, "TI2" Ti+Tr, "TR" 2*Tr  ,  "TR+TI1" Ti+2*Tr,  "TR+TI2" 3*Tr+Ti, "TR+TI2" Ti+3*Tr, "2TR" 4*Tr, "2TR+TI1" 4*Tr+Ti , "5TR" 5*Tr ) 
+set ytics ( "-M_0" -1, "0" 0, "M_0" 1, "0.5 M_0" 0.5 , "-0.5 M_0" -0.5  ) 
+
+
+
+
+#CSF
+l(x) = x < Ti ? 1-(1+k)*exp(-x/T1csf) \
+	: x <= Tr+Ti ? 1-exp((-x+Ti)/T1csf)*(1-cos(angle)*(1-(1+k)*exp(-(Ti )/T1csf))) \
+	: x <= Tr+Tr ? 1-exp((-x+Tr+Ti)/T1csf)*(1-cos(angle)*(1-k*exp((-(Tr+Ti)+Ti)/T1csf)*(1-cos(angle)*(1-(1+k)*exp(-(Ti )/T1csf))) )) \
+	: x <= Tr+Tr+Ti ? 1-exp((-x+Tr+Tr)/T1csf)*(1+k*(1-exp((-(Tr+Tr)+Tr+Ti)/T1csf)*(1-cos(angle)*(1-exp((-(Tr+Ti)+Ti)/T1csf)*(1-cos(angle)*(1-(1+k)*exp(-(Ti )/T1csf))) )))) \
+	: x <= Tr+Tr+Tr+Ti ? 1-exp((-x+Ti+Tr+Tr)/T1csf) * (1-cos(angle)*(1-exp((-(Tr+Tr+Ti)+Tr+Tr)/T1csf)*(1+k*(1-exp((-(Tr+Tr)+Tr+Ti)/T1csf)*(1-cos(angle)*(1-exp((-(Tr+Ti)+Ti)/T1csf)*(1-cos(angle)*(1-(1+k)*exp(-(Ti )/T1csf))) )))) ))\
+	: x <= Tr+Tr+Tr+Tr ? 1-exp((-x+Tr+Tr+Tr+Ti)/T1csf)* (1-cos(angle)*(1-exp((-(Tr+Tr+Tr+Ti)+Ti+Tr+Tr)/T1csf) * (1-cos(angle)*(1-exp((-(Tr+Tr+Ti)+Tr+Tr)/T1csf)*(1+k*(1-exp((-(Tr+Tr)+Tr+Ti)/T1csf)*(1-cos(angle)*(1-exp((-(Tr+Ti)+Ti)/T1csf)*(1-cos(angle)*(1-(1+k)*exp(-(Ti )/T1csf))) )))) )))) \
+	: x <= Tr+Tr+Tr+Tr+Ti ? 1-exp((-x+Tr+Tr+Tr+Tr)/T1csf)*(1+k*(1-exp((-(Tr+Tr+Tr+Tr)+Tr+Tr+Tr+Ti)/T1csf)* (1-cos(angle)*(1-exp((-(Tr+Tr+Tr+Ti)+Ti+Tr+Tr)/T1csf) * (1-cos(angle)*(1-exp((-(Tr+Tr+Ti)+Tr+Tr)/T1csf)*(1+k*(1-exp((-(Tr+Tr)+Tr+Ti)/T1csf)*(1-cos(angle)*(1-exp((-(Tr+Ti)+Ti)/T1csf)*(1-cos(angle)*(1-(1+k)*exp(-(Ti )/T1csf))) )))) ))))))\
+	: x <= Tr+Tr+Tr+Tr+Tr ? 1-exp((-x+Ti+Tr+Tr+Tr+Tr)/T1csf)*(1-cos(angle)*(1-exp((-(Tr+Tr+Tr+Tr+Ti)+Tr+Tr+Tr+Tr)/T1csf)*(1+k*(1-exp((-(Tr+Tr+Tr+Tr)+Tr+Tr+Tr+Ti)/T1csf)* (1-cos(angle)*(1-exp((-(Tr+Tr+Tr+Ti)+Ti+Tr+Tr)/T1csf) * (1-cos(angle)*(1-exp((-(Tr+Tr+Ti)+Tr+Tr)/T1csf)*(1+k*(1-exp((-(Tr+Tr)+Tr+Ti)/T1csf)*(1-cos(angle)*(1-exp((-(Tr+Ti)+Ti)/T1csf)*(1-cos(angle)*(1-(1+k)*exp(-(Ti )/T1csf))) )))) ))))))))\
+             : 0
+
+
+# Graue Masse 
+
+f(x) = x < Ti ? 1-(1+k)*exp(-x/T1gm) \
+	: x <= Tr+Ti ? 1-exp((-x+Ti)/T1gm)*(1-cos(angle)*(1-(1+k)*exp(-(Ti )/T1gm))) \
+	: x <= Tr+Tr ? 1-exp((-x+Tr+Ti)/T1gm)*(1-cos(angle)*(1-exp((-(Tr+Ti)+Ti)/T1gm)*(1-cos(angle)*(1-(1+k)*exp(-(Ti )/T1gm))) )) \
+	: x <= Tr+Tr+Ti ? 1-exp((-x+Tr+Tr)/T1gm)*(1+k*(1-exp((-(Tr+Tr)+Tr+Ti)/T1gm)*(1-cos(angle)*(1-exp((-(Tr+Ti)+Ti)/T1gm)*(1-cos(angle)*(1-(1+k)*exp(-(Ti )/T1gm))) )))) \
+	: x <= Tr+Tr+Tr+Ti ? 1-exp((-x+Ti+Tr+Tr)/T1gm) * (1-cos(angle)*(1-exp((-(Tr+Tr+Ti)+Tr+Tr)/T1gm)*(1+k*(1-exp((-(Tr+Tr)+Tr+Ti)/T1gm)*(1-cos(angle)*(1-exp((-(Tr+Ti)+Ti)/T1gm)*(1-cos(angle)*(1-(1+k)*exp(-(Ti )/T1gm))) )))) ))\
+	: x <= Tr+Tr+Tr+Tr ? 1-exp((-x+Tr+Tr+Tr+Ti)/T1gm)* (1-cos(angle)*(1-exp((-(Tr+Tr+Tr+Ti)+Ti+Tr+Tr)/T1gm) * (1-cos(angle)*(1-exp((-(Tr+Tr+Ti)+Tr+Tr)/T1gm)*(1+k*(1-exp((-(Tr+Tr)+Tr+Ti)/T1gm)*(1-cos(angle)*(1-exp((-(Tr+Ti)+Ti)/T1gm)*(1-cos(angle)*(1-(1+k)*exp(-(Ti )/T1gm))) )))) )))) \
+	: x <= Tr+Tr+Tr+Tr+Ti ? 1-exp((-x+Tr+Tr+Tr+Tr)/T1gm)*(1+k*(1-exp((-(Tr+Tr+Tr+Tr)+Tr+Tr+Tr+Ti)/T1gm)* (1-cos(angle)*(1-exp((-(Tr+Tr+Tr+Ti)+Ti+Tr+Tr)/T1gm) * (1-cos(angle)*(1-exp((-(Tr+Tr+Ti)+Tr+Tr)/T1gm)*(1+k*(1-exp((-(Tr+Tr)+Tr+Ti)/T1gm)*(1-cos(angle)*(1-exp((-(Tr+Ti)+Ti)/T1gm)*(1-cos(angle)*(1-(1+k)*exp(-(Ti )/T1gm))) )))) ))))))\
+	: x <= Tr+Tr+Tr+Tr+Tr ? 1-exp((-x+Ti+Tr+Tr+Tr+Tr)/T1gm)*(1-cos(angle)*(1-exp((-(Tr+Tr+Tr+Tr+Ti)+Tr+Tr+Tr+Tr)/T1gm)*(1+k*(1-exp((-(Tr+Tr+Tr+Tr)+Tr+Tr+Tr+Ti)/T1gm)* (1-cos(angle)*(1-exp((-(Tr+Tr+Tr+Ti)+Ti+Tr+Tr)/T1gm) * (1-cos(angle)*(1-exp((-(Tr+Tr+Ti)+Tr+Tr)/T1gm)*(1+k*(1-exp((-(Tr+Tr)+Tr+Ti)/T1gm)*(1-cos(angle)*(1-exp((-(Tr+Ti)+Ti)/T1gm)*(1-cos(angle)*(1-(1+k)*exp(-(Ti )/T1gm))) )))) ))))))))\
+             : 0
+
+
+
+# weise Masse 
+
+w(x) = x < Ti ? 1-2*exp(-x/T1wm) \
+	: x <= Tr ? 1-exp((-x+Ti)/T1wm)*(1-cos(angle)*(1-2*exp(-Ti/T1wm))) \
+	: x <= Tr+Ti ? 1-exp((-x+Tr)/T1wm)*(1+1-exp((-Tr+Ti)/T1wm)*(1-cos(angle)*(1-2*exp(-Ti/T1wm)))) \
+	: x <= Tr+Tr+Ti ? 1-exp((-x+Ti+Tr)/T1wm)*(1-cos(angle)*(1-exp((-(Tr+Ti)+Tr)/T1wm)*(1+1-exp((-Tr+Ti)/T1wm)*(1-cos(angle)*(1-2*exp(-Ti/T1wm)))))) \
+	: x <= Tr+Tr+Tr ? 1-exp((-x+Ti+Tr+Tr)/T1wm) * (1- cos(angle)*(1-exp((-(Tr+Tr+Ti)+Ti+Tr)/T1wm)*(1-cos(angle)*(1-exp((-(Tr+Ti)+Tr)/T1wm)*(1+1-exp((-Tr+Ti)/T1wm)*(1-cos(angle)*(1-2*exp(-Ti/T1wm))))))))\
+	: x <= Tr+Ti+Tr+Tr ? 1-exp((-x+Tr+Tr+Tr)/T1wm)*(1+(1-exp((-(Tr+Tr+Tr)+Ti+Tr+Tr)/T1wm) * (1- cos(angle)*(1-exp((-(Tr+Tr+Ti)+Ti+Tr)/T1wm)*(1-cos(angle)*(1-exp((-(Tr+Ti)+Tr)/T1wm)*(1+1-exp((-Tr+Ti)/T1wm)*(1-cos(angle)*(1-2*exp(-Ti/T1wm)))))))))) \
+	: x <= Tr+Tr+Tr+Tr+Ti ? 1-exp((-x+Ti+Tr+Tr+Tr)/T1wm)*(1-cos(angle)*(1-exp((-(Tr+Ti+Tr+Tr)+Tr+Tr+Tr)/T1wm)*(1+(1-exp((-(Tr+Tr+Tr)+Ti+Tr+Tr)/T1wm) * (1- cos(angle)*(1-exp((-(Tr+Tr+Ti)+Ti+Tr)/T1wm)*(1-cos(angle)*(1-exp((-(Tr+Ti)+Tr)/T1wm)*(1+1-exp((-Tr+Ti)/T1wm)*(1-cos(angle)*(1-2*exp(-Ti/T1wm)))))))))))) \
+	: x <= Tr+Tr+Tr+Tr+Tr ? 1-exp((-x+Ti+Tr+Tr+Tr+Tr)/T1wm)*(1-cos(angle)*(1-exp((-(Tr+Tr+Tr+Tr+Ti)+Ti+Tr+Tr+Tr)/T1wm)*(1-cos(angle)*(1-exp((-(Tr+Ti+Tr+Tr)+Tr+Tr+Tr)/T1wm)*(1+(1-exp((-(Tr+Tr+Tr)+Ti+Tr+Tr)/T1wm) * (1- cos(angle)*(1-exp((-(Tr+Tr+Ti)+Ti+Tr)/T1wm)*(1-cos(angle)*(1-exp((-(Tr+Ti)+Tr)/T1wm)*(1+1-exp((-Tr+Ti)/T1wm)*(1-cos(angle)*(1-2*exp(-Ti/T1wm)))))))))))))) \
+             : 0
+
+
+#T1 = 1 / log(2); # ohne steady state
+T1 = T1b # für Tr= 3
+g(x) 	 = x < Tr+Ti ? 1-(1+k)*exp(-x/T1) \
+	: x <= Tr+Tr ? 1-exp(-(x-Tr-Ti)/T1)*(1-cos(angle)*(1-(1+k)*exp(-(Tr+Ti)/T1))) \
+	: x <= Tr+Tr+Tr+Ti ? 1-(1+k)*exp(-(x-(Tr+Tr))/T1) \
+	: x <= Tr+Tr+Tr+Tr ? 1-exp(-(x-3*Tr-Ti)/T1)*(1-cos(angle)*(1-(1+k)*exp(-(Tr+Tr+Tr+Ti-(Tr+Tr))/T1))) \
+	: x <= Tr+Tr+Tr+Tr+Tr+Ti ? 1-(1+k)*exp(-(x-4*Tr)/T1) \
+             : 0
+
+h1(x) = x <  Tr+Tr ? -exp((-x+Tr)/T1)*(1-(-(1-2*exp(-Tr/T1))))+1 \
+             : 0
+h2(x) = x <  Tr+Tr+Tr ? -exp((-x+Tr+Tr)/T1)*(1-((-exp((-Tr+Tr)/T1)*(1-(-(1-2*exp(-Tr/T1))))+1)))+1 \
+             : 0
+h3(x) = x <  Tr+Tr+Tr+Tr ? -exp((-x+Tr+Tr+Tr)/T1)*(1-((-exp((-Tr+Tr)/T1)*(1-(-(1-2*exp(-Tr/T1))))+1)))+1 \
+             : 0
+H(x)= (Tr<x && x<=Tr+Ti+0.01 )? h1(x) :  \
+	(Tr+Tr+Tr<x && x<=Tr+Tr+Tr+Ti+0.01)? h3(x):1/0
+
+G(x)= (0<x && x<=2*Tr-0.02 )? g(x) :  \
+	(2*Tr<x && x<=4*Tr-0.02)? g(x): \
+	(4*Tr<x && x<=6*Tr-0.01)? g(x):1/0
+
+set size ratio 0.4
+
+set key top left
+
+set sample 1000
+#
+
+plot   l(x) title "CSF" linewidth 2 lc rgb "green" ,\
+f(x) title "GM" linewidth 2 lc rgb "blue" ,\
+ G(x) title "once inverted blood" linewidth 2 lc rgb "red" 
+# w(x) title "WM" linewidth 2 lc rgb "black" ,\
+ #H(x) title "twice inverted blood (flowing out of the imaging slice)" linewidth 0.2  lc rgb "orange"
+set term qt
+exit
