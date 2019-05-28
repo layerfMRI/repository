@@ -3,6 +3,14 @@
 
 echo "It starts now:    I expect two files Not_Nulled_Basis_a.nii and Nulled_Basis_b.nii that are motion corrected with SPM"
 
+
+#3dmean -prefix Not_Nulled_Basis_a.nii Not_Nulled_Basis_*a.nii 
+#3dmean -prefix Nulled_Basis_b.nii Nulled_Basis_*b.nii
+
+#3dTcat -prefix Not_Nulled_Basis_a.nii Not_Nulled_Basis_*a.nii 
+#3dTcat -prefix Nulled_Basis_b.nii Nulled_Basis_*b.nii
+
+
 NumVol=`3dinfo -nv Nulled_Basis_b.nii`
 3dcalc -a Nulled_Basis_b.nii'[3..'`expr $NumVol - 2`']' -b  Not_Nulled_Basis_a.nii'[3..'`expr $NumVol - 2`']' -expr 'a+b' -prefix combined.nii -overwrite
 3dTstat -cvarinv -prefix T1_weighted.nii -overwrite combined.nii 
