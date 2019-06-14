@@ -6,7 +6,7 @@ source $FREESURFER_HOME/SetUpFreeSurfer.sh
 pfad=$(pwd)
 SUBJECTS_DIR=$pfad
 
-recon-all -s subject_name -hires  -i *.nii  -all -parallel -openmp 6 
+recon-all -s subject_name -hires  -i *.nii  -all -parallel -openmp 4 
 
 
 cd subject_name

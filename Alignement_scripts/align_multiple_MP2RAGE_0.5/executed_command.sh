@@ -20,7 +20,7 @@ antsRegistration \
 --shrink-factors 12x8x4x2  \
 --smoothing-sigmas 4x3x2x1vox  \
 --transform SyN[0.1,3,0]  \
---metric CC[ref.nii,s1.nii,1,4]  \
+--metric MI[ref.nii,s1.nii,1,4]  \
 --convergence [100x100x70x50x20,1e-6,10]  \
 --shrink-factors 10x6x4x2x1  \
 --smoothing-sigmas 5x3x2x1x0vox 
@@ -47,7 +47,7 @@ antsRegistration  \
 --shrink-factors 12x8x4x2  \
 --smoothing-sigmas 4x3x2x1vox  \
 --transform SyN[0.1,3,0]  \
---metric CC[ref.nii,s3.nii,1,4]  \
+--metric MI[ref.nii,s3.nii,1,4]  \
 --convergence [100x100x70x50x20,1e-6,10]  \
 --shrink-factors 10x6x4x2x1  \
 --smoothing-sigmas 5x3x2x1x0vox 
