@@ -54,7 +54,7 @@ antsRegistration  \
 # \
 #-x mask.nii
 
-3dMean -prefix MP2RAGE_0.5.nii ref.nii registered3_Warped.nii.gz registered1_Warped.nii.gz
+3dMean -prefix MP2RAGE_0.5.nii ref.nii registered3_Warped.nii.gz registered1_Warped.nii.gz -overwrite
 
 
 
