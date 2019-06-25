@@ -72,7 +72,7 @@ LN_BOCO -Nulled Nulled_intemp.nii -BOLD BOLD_intemp.nii
 
 LN_MP2RAGE_DNOISE -INV1 mean_nulled.nii -INV2 mean_notnulled.nii -UNI T1_weighted.nii -beta 5
 
-start_bias_field.sh start_bias_field.sh dnoised_T1_weighted.nii
+start_bias_field.sh dnoised_T1_weighted.nii
 
 3drefit -TR 2.5 BOLD_intemp.nii
 3drefit -TR 2.5 VASO_LN.nii
