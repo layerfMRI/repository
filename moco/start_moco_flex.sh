@@ -1,6 +1,9 @@
 #!/bin/bash
 
 cnt=0
+
+3dautomask -prefix moma.nii -peels 3 -dilate 2 -overwrite S*.nii 
+
 for filename in ./S*.nii
 do
 echo $filename

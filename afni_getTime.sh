@@ -1,7 +1,11 @@
 #!/bin/bash
 
 #get mean value
-3dROIstats -mask $2 -1DRformat -quiet $1 > timecourse_$1.dat
+3dROIstats -mask $2 -1DRformat -quiet $1 > timecourse_$1.dat 
+3dTcorr1D -prefix corr_$1 $1 timecourse_$1.dat -overwrite
+1dplot -sepscl timecourse_$1.dat 
+
+
 #get standard deviation
 #3dROIstats -mask layers.nii -1DRformat -quiet -sigma $1 >> layer_t.dat
 #get number of voxels in each layer

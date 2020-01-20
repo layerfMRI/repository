@@ -78,15 +78,15 @@ delta_x=$(3dinfo -di EPI.nii)
 delta_y=$(3dinfo -dj EPI.nii)
 delta_z=$(3dinfo -dk EPI.nii)
 
-sdelta_x=$(echo "(($delta_x / 4))"|bc -l)
-sdelta_y=$(echo "(($delta_x / 4))"|bc -l)
-sdelta_z=$(echo "(($delta_z / 4))"|bc -l)
+sdelta_x=$(echo "((sqrt($delta_x * $delta_x) / 2))"|bc -l)
+sdelta_y=$(echo "((sqrt($delta_y * $delta_y) / 2))"|bc -l)
+sdelta_z=$(echo "((sqrt($delta_z * $delta_z) / 2))"|bc -l)
 
 echo "$sdelta_x"
 echo "$sdelta_y"
 echo "$sdelta_z"
 
-3dresample -dxyz $sdelta_x $sdelta_y $sdelta_z -rmode Li -overwrite -prefix scaled_EPI.nii -input EPI.nii
+3dresample -dxyz $sdelta_x $sdelta_y $sdelta_z -rmode Bk -overwrite -prefix scaled_EPI.nii -input EPI.nii
 
 
 
@@ -165,7 +165,9 @@ cp rim_auto.nii ../../
 cp scaled_EPI.nii ../../
 cp GM_robbon4_manual_corr.nii ../../
 
-
+cd ../../ 
+3dcalc -a pial_vol.nii -b WM_vol.nii -c fill.nii -expr 'step(a)+2*step(b)+3*step(c)-3*step(a*c)-3*step(b*c)' -prefix rim.nii -overwrite
+ 
 echo "und tschuess"
 
  

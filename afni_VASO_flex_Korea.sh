@@ -75,15 +75,17 @@ LN_BOCO -Nulled Nulled_intemp.nii -BOLD BOLD_intemp.nii
   3dTstat  -overwrite -cvarinv  -prefix VASO.tSNR.nii \
      VASO_LN.nii'[1..$]'
 
-LN_SKEW -timeseries BOLD.nii
-LN_SKEW -timeseries VASO_LN.nii
 
-3drefit -TR 2. BOLD_intemp.nii
-3drefit -TR 2. VASO_LN.nii
+
+3drefit -TR 2.5 BOLD_intemp.nii
+3drefit -TR 2.5 VASO_LN.nii
 
 LN_MP2RAGE_DNOISE -INV1 mean_nulled.nii -INV2 mean_notnulled.nii -UNI T1_weighted.nii -beta 5
 
 start_bias_field.sh dnoised_T1_weighted.nii
+
+LN_SKEW -timeseries BOLD.nii
+LN_SKEW -timeseries VASO_LN.nii
 
 
 echo "und tschuess"

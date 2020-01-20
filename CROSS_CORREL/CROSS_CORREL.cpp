@@ -86,7 +86,7 @@ int ingnore = 0;
 
 cout << "nrep = " << nrep << endl; 
 
-int numb_layers = 50; // This is the maximal number of layers. I don't know how to allocate it dynamically.
+int numb_layers = 250; // This is the maximal number of layers. I don't know how to allocate it dynamically.
 
 double numb_voxels[numb_layers] ; 
 double mean_layers[numb_layers] ; 

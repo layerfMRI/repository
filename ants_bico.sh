@@ -3,6 +3,9 @@
 
 echo "fange an"
 
-N4BiasFieldCorrection -d 3 -i $1 -r 1 -o bico_$1
+
+3dAutomask -prefix mask.nii -peels 3 -dilate 2 -overwrite $1
+
+N4BiasFieldCorrection -d 3 -i $1 -r 1 -s 1 -x mask.nii -o bico_$1
 
 echo "und tschuess"
