@@ -64,17 +64,21 @@ LN_BOCO -Nulled Nulled_intemp.nii -BOLD BOLD_intemp.nii
   3dTstat  -overwrite -cvarinv  -prefix VASO.tSNR.nii \
      VASO_LN.nii'[1..$]'
 
+3dcalc -a BOLD.Mean.nii -b mean_nulled.nii -expr '(b-1)/(a+b)+1' -prefix T1w.nii -overwrite
+
 #LN_SKEW -timeseries BOLD.nii
 #LN_SKEW -timeseries VASO_LN.nii
 
-3dMean -prefix Nulled_Basis_b.nii Nulled_Basis_*b.nii
-3dMean -prefix Not_Nulled_Basis_a.nii Not_Nulled_Basis_*a.nii
 
-LN_MP2RAGE_DNOISE -INV1 mean_nulled.nii -INV2 mean_notnulled.nii -UNI T1_weighted.nii -beta 5
 
-start_bias_field.sh dnoised_T1_weighted.nii
+LN_MP2RAGE_DNOISE -INV1 mean_nulled.nii -INV2 mean_notnulled.nii -UNI T1w.nii -beta 5
+
+start_bias_field.sh dnoised_T1w.nii
 
 3drefit -TR 2.5 BOLD_intemp.nii
 3drefit -TR 2.5 VASO_LN.nii
+
+3dMean -prefix Nulled_Basis_b.nii Nulled_Basis_*b.nii
+3dMean -prefix Not_Nulled_Basis_a.nii Not_Nulled_Basis_*a.nii
 
 echo "und tschuess"
