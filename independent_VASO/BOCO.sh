@@ -29,9 +29,10 @@ echo "calculating Mean and tSNR maps"
 3dTstat  -overwrite -cvarinv -prefix VASO.tSNR.nii VASO_LN.nii'[1..$]'
 
 echo "calculating T1 in EPI space"
-3dTcat -prefix combined.nii  moco_nulled.nii moco_notnulled.nii -overwrite 
-3dTstat -tsnr -overwrite  -prefix T1w.nii combined.nii
-rm combined.nii 
+#3dTcat -prefix combined.nii  moco_nulled.nii moco_notnulled.nii -overwrite 
+#3dTstat -tsnr -overwrite  -prefix T1w.nii combined.nii
+#rm combined.nii 
+3dcalc -a mean_nulled.nii -b mean_notnulled.nii -expr 'maxbelow(minabove(((a-b)/(a+b)+1),0.2),1.2)' -prefix T1w.nii -overwrite
 #3dcalc -a mean_nulled.nii -b mean_notnulled.nii -expr 'abs(b-a)/(a+b)' -prefix T1w.nii -overwrite
 
 echo "curtosis and skew"
@@ -40,6 +41,7 @@ echo "curtosis and skew"
 
 
 #for anatomical imaging
+
 LN_MP2RAGE_DNOISE -INV2 mean_nulled.nii -INV1 mean_notnulled.nii -UNI T1w.nii -beta 10
 3dAutomask -prefix mask.nii -peels 3 -dilate 2 mean_nulled.nii
 N4BiasFieldCorrection -d 3 -i dnoised_T1w.nii -r 1 -s 1 -x mask.nii -o bico_T1w.nii
