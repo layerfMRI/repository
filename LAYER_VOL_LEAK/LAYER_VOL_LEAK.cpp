@@ -17,7 +17,7 @@
 
 //#include "utils.hpp"
 
-void usage() { cout << "LAYER_VOL_LEAK  < rim >" << endl;}
+void usage() { cout << "LAYER_VOL_LEAK  < rim >  <itterations>" << endl;}
 
 
 
@@ -25,10 +25,11 @@ void usage() { cout << "LAYER_VOL_LEAK  < rim >" << endl;}
 
 int main(int argc,char* argv[]) {
 
-  if (argc!=2) {usage(); return 0;}
+  if (argc!=3) {usage(); return 0;}
   STD_string filename1(argv[1]);
-
-
+  float iteratiosn(atoi(argv[2]));
+  int N_iteratiosn =  (int) iteratiosn;
+ 
 
 
 float kernal_size = 1; // corresponds to one voxel sice. 
@@ -95,7 +96,7 @@ cout << " kernal_size " <<  kernal_size<<  endl;
 ///////////////////////////////////
 ////START iterative loop here /////
 ///////////////////////////////////
-int N_iteratiosn = 400 ; 
+//int N_iteratiosn = 3400 ; 
 for (int iteration = 0 ; iteration < N_iteratiosn ; ++iteration){
 
 cout <<"  iteration  " << iteration  << " of " << N_iteratiosn << endl; 
