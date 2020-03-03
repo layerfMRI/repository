@@ -30,7 +30,7 @@ echo "calculating Mean and tSNR maps"
 
 echo "calculating T1 in EPI space"
 3dTcat -prefix combined.nii  moco_nulled.nii moco_notnulled.nii -overwrite 
-3dTstat -carinv -overwrite  -prefix T1w.nii combined.nii
+3dTstat -cvarinv -overwrite  -prefix T1w.nii combined.nii
 rm combined.nii 
 #3dcalc -a mean_nulled.nii -b mean_notnulled.nii -expr 'abs(b-a)/(a+b)' -prefix T1w.nii -overwrite
 

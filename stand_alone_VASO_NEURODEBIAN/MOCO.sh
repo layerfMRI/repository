@@ -5,7 +5,7 @@
 ###### parameters that are not used  ######
 ###########################################
 
-ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=3
+ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=6
 export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS
 tr=1 
 basevol=1000 # ANTs indexing
@@ -23,7 +23,7 @@ basevol=1000 # ANTs indexing
 #3dcopy $1'[1..$(2)]' notnulled.nii 
 
 
-3dAutomask -prefix moma.nii -peels 3 -dilate 2 -overwrite notnulled.nii
+3dAutomask -prefix moma.nii -peels 3 -dilate 2  notnulled.nii
 
 ###########################################
 ####### Do MOCO on notnulled  #############

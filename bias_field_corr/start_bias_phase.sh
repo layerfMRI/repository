@@ -9,7 +9,7 @@ cp $1 uncorr.nii
 
 echo "hole SPM motion batch"
 cp /Users/l.huber/repository/bias_field_corr/Bias_phase_script_job.m ./Bias_phase_script_job.m
-/Applications/MATLAB_R2018b.app/bin/matlab -nodesktop -nosplash -r "Bias_phase_script_job"
+/Applications/MATLAB_2019b.app/bin/matlab -nodesktop -nosplash -r "Bias_phase_script_job"
 
 3dcalc -a muncorr.nii -prefix muncorr.nii -overwrite -expr 'a' -datum short
 
