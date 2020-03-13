@@ -23,7 +23,7 @@ basevol=1000 # ANTs indexing
 #3dcopy $1'[1..$(2)]' notnulled.nii 
 
 
-3dAutomask -prefix moma.nii -peels 3 -dilate 2 -overwrite notnulled.nii
+3dAutomask -prefix moma.nii -peels 3 -dilate 2 notnulled.nii
 
 ###########################################
 ####### Do MOCO on notnulled  #############
@@ -45,12 +45,12 @@ antsRegistration \
 --dimensionality 3 \
 --float 1 \
 --collapse-output-transforms 1 \
---output [ vol_${i}_,vol_${i}_Warped.nii.gz,vol_${i}_InverseWarped.nii.gz ] \
+--output [ vol_${i}_,vol_${i}_Warped.nii.gz,1 ] \
 --interpolation BSpline[2] \
 --use-histogram-matching 1 \
 --winsorize-image-intensities [ 0.005,0.995 ] \
 -x moma.nii \
---initial-moving-transform [ nn_reference.nii,vol_${i}.nii,1 ] \
+--initial-moving-transform [ nn_reference.nii,vol_${i}.nii,1] \
 --transform Rigid[ 0.1 ] \
 --metric MI[ nn_reference.nii,vol_${i}.nii,1,32,Regular,0.25 ] \
 --convergence [ 250x100,1e-6,10 ] \
@@ -89,7 +89,7 @@ antsRegistration \
 --dimensionality 3 \
 --float 1 \
 --collapse-output-transforms 1 \
---output [ vol_${i}_,vol_${i}_Warped.nii.gz,vol_${i}_InverseWarped.nii.gz ] \
+--output [ vol_${i}_,vol_${i}_Warped.nii.gz,1] \
 --interpolation BSpline[2] \
 --use-histogram-matching 1 \
 --winsorize-image-intensities [ 0.005,0.995 ] \

@@ -1,4 +1,6 @@
 #!/bin/bash
+3dautomask -prefix moma.nii -peels 3 -dilate 2 S*.nii 
+
 
 cnt=0
 for filename in ./S*.nii

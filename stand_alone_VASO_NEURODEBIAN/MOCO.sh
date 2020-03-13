@@ -45,7 +45,7 @@ antsRegistration \
 --dimensionality 3 \
 --float 1 \
 --collapse-output-transforms 1 \
---output [ vol_${i}_,vol_${i}_Warped.nii.gz,vol_${i}_InverseWarped.nii.gz ] \
+--output [ vol_${i}_,vol_${i}_Warped.nii.gz,1] \
 --interpolation BSpline[2] \
 --use-histogram-matching 1 \
 --winsorize-image-intensities [ 0.005,0.995 ] \
@@ -88,7 +88,7 @@ antsRegistration \
 --dimensionality 3 \
 --float 1 \
 --collapse-output-transforms 1 \
---output [ vol_${i}_,vol_${i}_Warped.nii.gz,vol_${i}_InverseWarped.nii.gz ] \
+--output [ vol_${i}_,vol_${i}_Warped.nii.gz,1] \
 --interpolation BSpline[2] \
 --use-histogram-matching 1 \
 --winsorize-image-intensities [ 0.005,0.995 ] \
