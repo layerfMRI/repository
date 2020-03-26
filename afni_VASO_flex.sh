@@ -70,10 +70,9 @@ LN_BOCO -Nulled Nulled_intemp.nii -BOLD BOLD_intemp.nii
 #LN_SKEW -timeseries VASO_LN.nii
 
 
-
 LN_MP2RAGE_DNOISE -INV1 mean_nulled.nii -INV2 mean_notnulled.nii -UNI T1w.nii -beta 5
 
-start_bias_field.sh dnoised_T1w.nii
+start_bias_field.sh denoised_T1w.nii
 
 3drefit -TR 2.5 BOLD_intemp.nii
 3drefit -TR 2.5 VASO_LN.nii
