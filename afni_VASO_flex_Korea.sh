@@ -82,10 +82,10 @@ LN_BOCO -Nulled Nulled_intemp.nii -BOLD BOLD_intemp.nii
 
 LN_MP2RAGE_DNOISE -INV1 mean_nulled.nii -INV2 mean_notnulled.nii -UNI T1_weighted.nii -beta 5
 
-start_bias_field.sh denoised_T1_weighted.nii
+start_bias_field.sh T1_weighted_denoised.nii
 
-LN_SKEW -timeseries BOLD.nii
-LN_SKEW -timeseries VASO_LN.nii
+LN_SKEW -input BOLD.nii
+LN_SKEW -input Nulled_intemp_VASO_LN.nii
 
 
 echo "und tschuess"
