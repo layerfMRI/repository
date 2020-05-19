@@ -64,7 +64,7 @@ mv BOLD.nii Nulled.nii
 mv temp.nii  BOLD.nii
 rm temp.nii
 
-LN_BOCO -Nulled Nulled_intemp.nii -BOLD BOLD_intemp.nii 
+LN_BOCO -Nulled Nulled_intemp.nii -BOLD BOLD_intemp.nii -output VASO_LN.nii
 
   3dTstat  -overwrite -mean  -prefix BOLD.Mean.nii \
      BOLD_intemp.nii'[1..$]'
@@ -85,7 +85,7 @@ LN_MP2RAGE_DNOISE -INV1 mean_nulled.nii -INV2 mean_notnulled.nii -UNI T1_weighte
 start_bias_field.sh T1_weighted_denoised.nii
 
 LN_SKEW -input BOLD.nii
-LN_SKEW -input Nulled_intemp_VASO_LN.nii
+LN_SKEW -input VASO_LN.nii
 
 
 echo "und tschuess"
