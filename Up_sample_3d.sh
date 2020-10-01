@@ -20,7 +20,10 @@ echo "$sdelta_z"
 #3dresample -dxyz $sdelta_x $sdelta_y $sdelta_z -rmode NN -overwrite -prefix scaled_$1 -input $1
 
 3dcalc -a scaled_$1 -datum short -gscale -expr 'a' -prefix scaled_$1 -overwrite
- 
+
+
+#alternative ResampleImage 3 inputImage.nii.gz outputImage.nii.gz  0.25x0.25x0.25 0 3['l'] 6
+
 
 echo "und tschuess"
 

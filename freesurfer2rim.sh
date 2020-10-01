@@ -106,7 +106,7 @@ echo  " **************************"
 #3dLocalstat -nbhd 'SPHERE(0.3)' -stat mean -overwrite -prefix filled_fill.nii fill.nii 
 3dcalc -a  filled_fill.nii -b fill.nii -expr 'step(step(a-0.5)+b)' -overwrite  -prefix filled_fill.nii 
 
-3dcalc -a  filled_fill.nii -b pial_vol.nii -c WM_vol.nii -expr 'step(a-b-c)' -overwrite  -prefix GM_robbon4_manual_corr.nii 
+3dcalc -a  fill.nii -b pial_vol.nii -c WM_vol.nii -expr 'step(a-b-c)' -overwrite  -prefix GM_robbon4_manual_corr.nii 
 
 3dcalc -a filled_fill.nii -b pial_vol.nii -c WM_vol.nii -expr 'a + b + 2*c ' -prefix rim_auto.nii -overwrite
 
