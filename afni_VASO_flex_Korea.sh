@@ -64,7 +64,7 @@ mv BOLD.nii Nulled.nii
 mv temp.nii  BOLD.nii
 rm temp.nii
 
-LN_BOCO -Nulled Nulled_intemp.nii -BOLD BOLD_intemp.nii -output VASO_LN.nii
+LN_BOCO -Nulled Nulled_intemp.nii -BOLD BOLD_intemp.nii VASO_LN.nii
 
   3dTstat  -overwrite -mean  -prefix BOLD.Mean.nii \
      BOLD_intemp.nii'[1..$]'

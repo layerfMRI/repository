@@ -53,7 +53,7 @@ NumVol=`3dinfo -nv BOLD_intemp.nii`
 # 3dTcat -overwrite -prefix VASO_intemp.nii tmp.VASO_vol1.nii tmp.VASO_othervols.nii 
 #rm tmp.VASO_vol1*.nii tmp.VASO_othervols*.nii tmp.VASO_vollast.nii
 
-LN_BOCO -Nulled Nulled_intemp.nii -BOLD BOLD_intemp.nii -output VASO_LN.nii
+LN_BOCO -Nulled Nulled_intemp.nii -BOLD BOLD_intemp.nii
 
   3dTstat  -overwrite -mean  -prefix BOLD.Mean.nii \
      BOLD_intemp.nii'[1..$]'
