@@ -23,6 +23,7 @@ echo "$sdelta_z"
 
 
 #alternative ResampleImage 3 inputImage.nii.gz outputImage.nii.gz  0.25x0.25x0.25 0 3['l'] 6
+# Itksapnresample
 
 
 echo "und tschuess"

@@ -1,0 +1,20 @@
+ 
+#runs with:
+# gnuplot
+# load "gnuplot_profile_plotLN.txt"
+
+
+set terminal qt enhanced 40
+set terminal postscript enhanced color solid "Helvetica" 25
+set out "profile.ps"
+
+set title "title" 
+set ylabel "activity" 
+set xlabel "cortical depth (left is WM, right is CSF)"
+
+plot    "layer_profile.txt" u 1:($2) w lines title "contrast type 1"  linewidth 3 linecolor rgb "blue"  ,\
+        "layer_profile.txt" u 1:($2):($3)/sqrt($4-1) w yerrorbars title "" pt 1  linewidth 2 linecolor rgb "blue"  
+
+
+set term qt
+exit
