@@ -1,2 +1,5 @@
 
 romeo/bin/romeo.so
+
+# Mac stuff
+*.DS_Store
