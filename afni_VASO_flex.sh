@@ -71,7 +71,7 @@ LN_BOCO -Nulled Nulled_intemp.nii -BOLD BOLD_intemp.nii
 
 
 #LN_MP2RAGE_DNOISE -INV1 mean_nulled.nii -INV2 mean_notnulled.nii -UNI T1w.nii -beta 5 -output T1w_denoised.nii
-LN_MP2RAGE_DNOISE -INV1 mean_nulled.nii -INV2 mean_notnulled.nii  -UNI VASO.Mean.nii -beta 0.5
+LN_MP2RAGE_DNOISE -INV1 mean_nulled.nii -INV2 BOLD.Mean.nii  -UNI VASO.Mean.nii -beta 0.5
 
 start_bias_field.sh VASO_denoised.Mean.nii
 

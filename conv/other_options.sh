@@ -11,3 +11,5 @@ dcm2niix -z y -f S_%p_%t_%s -o ../ ./
 dcm2niix -b y -z y -i n  -o ../ ./
 
 If you want it isisconv like, then I would call it like: dcm2niix -ba y -z y -o ${output_dir} -f S%s_%d_e%e ${input_dir}
+
+Dimon -quiet -sort_by_acq_time -infile_pattern "mr_0016/*.dcm" -dicom_org -gert_create_dataset -gert_to3d_prefix testMosaic.nii

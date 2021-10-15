@@ -5,6 +5,12 @@ echo "fange an"
 
 
 
+#for image in ./*.IMA
+#do
+#isisconv -in $image -out ./S_{acquisitionNumber}_{DICOM/SIEMENS\ CSA\ HEADER/ICE_Dims}.nii -wdialect fsl -repn s16bit
+#done
+
+
 
 for dir in ./*/
 do
@@ -13,8 +19,13 @@ cd ./$dir
 echo  ${dir##*/}
 
 
-#isisconv can be installed here https://layerfmri.com/2018/11/29/installing-isisconv/
-isisconv -in . -out ./S_.nii -wdialect fsl -repn s16bit
+#isisconv bug sur version
+
+for image in ./*.IMA
+do
+isisconv -in $image -out ./S_{acquisitionNumber}_{DICOM/SIEMENS\ CSA\ HEADER/ICE_Dims}.nii -wdialect fsl -repn s16bit
+done
+
 #rname is a bash command: brew install rename, or sudo-apt get install rename.
 rename -e 's/\d+/sprintf("%03d",$&)/e' -- *.nii
 fslmerge -t combined.nii S*.nii

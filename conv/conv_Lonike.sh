@@ -6,15 +6,10 @@ echo "fange an"
 
 
 
-for dir in ./*/
-do
-dir=${dir%*/}
-cd ./$dir
-echo  ${dir##*/}
-
+dir=${PWD##*/}
 
 #isisconv can be installed here https://layerfmri.com/2018/11/29/installing-isisconv/
-isisconv -in . -out ./S_.nii -wdialect fsl -repn s16bit
+isisconv -in . -out ./S_{DICOM/AcquisitionNumber}_{DICOM/CSAImageHeaderInfo/ICE_Dims}.nii -wdialect fsl -repn s16bit
 #rname is a bash command: brew install rename, or sudo-apt get install rename.
 rename -e 's/\d+/sprintf("%03d",$&)/e' -- *.nii
 fslmerge -t combined.nii S*.nii
@@ -47,8 +42,7 @@ rm S*_1_1_1*.nii
 
 
 
-cd ..
-done
+
 
 
 
