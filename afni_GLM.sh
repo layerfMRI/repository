@@ -25,3 +25,10 @@ echo "GLM done"
 3dcalc -a STATS_$1'[1]'  -expr '-1*a' -prefix 1_STATS_NEG_$1 -overwrite 
 3dcalc -a STATS_$1'[2]'  -expr '-1*a' -prefix 2_STATS_NEG_$1 -overwrite 
 3dcalc -a STATS_$1'[2]'  -expr 'a' -prefix 2_STATS_$1 -overwrite 
+
+3dTstat -mean -overwrite -prefix mean.nii $1
+
+3dcalc -a mean.nii -b 1_HRF_$1      -expr 'b/a*100' -prefix 1_HRF_percent_$1
+3dcalc -a mean.nii -b  1_HRF_NEG_$1 -expr 'b/a*100' -prefix 1_HRF_NEG_percent_$1
+
+rm mean.nii
