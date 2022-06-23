@@ -36,16 +36,16 @@ set fmri(outputdir) ""
 set fmri(tr) 2.500000 
 
 # Total volumes
-set fmri(npts) 422
+set fmri(npts) 424
 
 # Delete volumes
-set fmri(ndelete) 3
+set fmri(ndelete) 0
 
 # Perfusion tag/control order
 set fmri(tagfirst) 1
 
 # Number of first-level analyses
-set fmri(multiple) 1
+set fmri(multiple) 2
 
 # Higher-level input type
 # 1 : Inputs are lower-level FEAT directories
@@ -62,10 +62,10 @@ set fmri(brain_thresh) 10
 set fmri(critical_z) 5.3
 
 # Noise level
-set fmri(noise) 0.66
+set fmri(noise) 4.985235
 
 # Noise AR(1)
-set fmri(noisear) 0.34
+set fmri(noisear) 0.664797
 
 # Motion correction
 # 0 : None
@@ -82,10 +82,10 @@ set fmri(regunwarp_yn) 0
 set fmri(gdc) ""
 
 # EPI dwell time (ms)
-set fmri(dwell) 0.7
+set fmri(dwell) 0.0
 
 # EPI TE (ms)
-set fmri(te) 35
+set fmri(te) 0.0
 
 # % Signal loss threshold
 set fmri(signallossthresh) 10
@@ -109,7 +109,7 @@ set fmri(st_file) ""
 set fmri(bet_yn) 0
 
 # Spatial smoothing FWHM (mm)
-set fmri(smooth) 3.0
+set fmri(smooth) 1
 
 # Intensity normalization
 set fmri(norm_yn) 0
@@ -158,8 +158,8 @@ set fmri(evs_real) 2
 set fmri(evs_vox) 0
 
 # Number of contrasts
-set fmri(ncon_orig) 4
-set fmri(ncon_real) 4
+set fmri(ncon_orig) 1
+set fmri(ncon_real) 1
 
 # Number of F-tests
 set fmri(nftests_orig) 0
@@ -260,26 +260,58 @@ set fmri(regstandard_dof) 12
 set fmri(regstandard_nonlinear_yn) 0
 
 # Control nonlinear warp field resolution
-set fmri(regstandard_nonlinear_warpres) 10 
+set fmri(regstandard_nonlinear_warpres) 10
 
 # High pass filter cutoff
 set fmri(paradigm_hp) 100
 
 # Total voxels
-set fmri(totalVoxels) 511909632
+set fmri(totalVoxels) 499872256
 
 
 # Number of lower-level copes feeding into higher-level analysis
 set fmri(ncopeinputs) 0
 
 # 4D AVW data or FEAT directory (1)
-set feat_files(1) "/Users/l.huber/Documents/Playground/20201028_Kronbichler/v003/moco_motor/run2/BOLD_intemp"
+#set feat_files(1) "/Users/administrator/Desktop/Motor_analysis/P008/M1/VASO_LN"
+#set feat_files(31) "/Users/administrator/Desktop/Motor_analysis/P008/M2/BOLD_intemp"
+#set feat_files(2) "/Users/administrator/Desktop/Motor_analysis/P008/M2/VASO_LN"
+#set feat_files(3) "/Users/administrator/Desktop/Motor_analysis/P009/M1/BOLD_intemp"
+#set feat_files(4) "/Users/administrator/Desktop/Motor_analysis/P009/M1/VASO_LN"
+#set feat_files(5) "/Users/administrator/Desktop/Motor_analysis/P009/M2/BOLD_intemp"
+#set feat_files(6) "/Users/administrator/Desktop/Motor_analysis/P009/M2/VASO_LN"
+set feat_files(7) "/Users/administrator/Desktop/Motor_analysis/P0010/M1/BOLD_intemp"
+set feat_files(8) "/Users/administrator/Desktop/Motor_analysis/P0010/M1/VASO_LN"
+set feat_files(9) "/Users/administrator/Desktop/Motor_analysis/P0010/M2/BOLD_intemp"
+set feat_files(10) "/Users/administrator/Desktop/Motor_analysis/P0010/M2/VASO_LN"
+set feat_files(11) "/Users/administrator/Desktop/Motor_analysis/P0011/M1/BOLD_intemp"
+set feat_files(12) "/Users/administrator/Desktop/Motor_analysis/P0011/M1/VASO_LN"
+set feat_files(13) "/Users/administrator/Desktop/Motor_analysis/P0011/M2/BOLD_intemp"
+set feat_files(14) "/Users/administrator/Desktop/Motor_analysis/P0011/M2/VASO_LN"
+set feat_files(15) "/Users/administrator/Desktop/Motor_analysis/P0012/M1/BOLD_intemp"
+set feat_files(16) "/Users/administrator/Desktop/Motor_analysis/P0012/M1/VASO_LN"
+set feat_files(17) "/Users/administrator/Desktop/Motor_analysis/P0012/M2/BOLD_intemp"
+set feat_files(18) "/Users/administrator/Desktop/Motor_analysis/P0013/M2/VASO_LN"
+set feat_files(19) "/Users/administrator/Desktop/Motor_analysis/P0013/M1/BOLD_intemp"
+set feat_files(20) "/Users/administrator/Desktop/Motor_analysis/P0013/M1/VASO_LN"
+set feat_files(21) "/Users/administrator/Desktop/Motor_analysis/P0013/M2/BOLD_intemp"
+set feat_files(22) "/Users/administrator/Desktop/Motor_analysis/P0013/M2/VASO_LN"
+set feat_files(23) "/Users/administrator/Desktop/Motor_analysis/P0014/M1/BOLD_intemp"
+set feat_files(24) "/Users/administrator/Desktop/Motor_analysis/P0014/M1/VASO_LN"
+set feat_files(25) "/Users/administrator/Desktop/Motor_analysis/P0014/M2/BOLD_intemp"
+set feat_files(26) "/Users/administrator/Desktop/Motor_analysis/P0014/M2/VASO_LN"
+set feat_files(27) "/Users/administrator/Desktop/Motor_analysis/P0015/M1/BOLD_intemp"
+set feat_files(28) "/Users/administrator/Desktop/Motor_analysis/P0015/M1/VASO_LN"
+set feat_files(29) "/Users/administrator/Desktop/Motor_analysis/P0015/M2/BOLD_intemp"
+set feat_files(30) "/Users/administrator/Desktop/Motor_analysis/P0015/M2/VASO_LN"
+
+
 
 # Add confound EVs text file
 set fmri(confoundevs) 0
 
 # EV 1 title
-set fmri(evtitle1) "left"
+set fmri(evtitle1) ""
 
 # Basic waveform shape (EV 1)
 # 0 : Square
@@ -314,7 +346,7 @@ set fmri(deriv_yn1) 0
 set fmri(skip1) 0
 
 # Off (EV 1)
-set fmri(off1) 95.0
+set fmri(off1) 95
 
 # On (EV 1)
 set fmri(on1) 35
@@ -341,7 +373,7 @@ set fmri(ortho1.1) 0
 set fmri(ortho1.2) 0
 
 # EV 2 title
-set fmri(evtitle2) "right"
+set fmri(evtitle2) ""
 
 # Basic waveform shape (EV 2)
 # 0 : Square
@@ -420,42 +452,6 @@ set fmri(con_real1.1) 1
 # Real contrast_real vector 1 element 2
 set fmri(con_real1.2) 0
 
-# Display images for contrast_real 2
-set fmri(conpic_real.2) 1
-
-# Title for contrast_real 2
-set fmri(conname_real.2) ""
-
-# Real contrast_real vector 2 element 1
-set fmri(con_real2.1) 0
-
-# Real contrast_real vector 2 element 2
-set fmri(con_real2.2) 1.0
-
-# Display images for contrast_real 3
-set fmri(conpic_real.3) 1
-
-# Title for contrast_real 3
-set fmri(conname_real.3) ""
-
-# Real contrast_real vector 3 element 1
-set fmri(con_real3.1) -1.0
-
-# Real contrast_real vector 3 element 2
-set fmri(con_real3.2) 0
-
-# Display images for contrast_real 4
-set fmri(conpic_real.4) 1
-
-# Title for contrast_real 4
-set fmri(conname_real.4) ""
-
-# Real contrast_real vector 4 element 1
-set fmri(con_real4.1) 0
-
-# Real contrast_real vector 4 element 2
-set fmri(con_real4.2) -1.0
-
 # Display images for contrast_orig 1
 set fmri(conpic_orig.1) 1
 
@@ -468,80 +464,8 @@ set fmri(con_orig1.1) 1
 # Real contrast_orig vector 1 element 2
 set fmri(con_orig1.2) 0
 
-# Display images for contrast_orig 2
-set fmri(conpic_orig.2) 1
-
-# Title for contrast_orig 2
-set fmri(conname_orig.2) ""
-
-# Real contrast_orig vector 2 element 1
-set fmri(con_orig2.1) 0
-
-# Real contrast_orig vector 2 element 2
-set fmri(con_orig2.2) 1.0
-
-# Display images for contrast_orig 3
-set fmri(conpic_orig.3) 1
-
-# Title for contrast_orig 3
-set fmri(conname_orig.3) ""
-
-# Real contrast_orig vector 3 element 1
-set fmri(con_orig3.1) -1.0
-
-# Real contrast_orig vector 3 element 2
-set fmri(con_orig3.2) 0
-
-# Display images for contrast_orig 4
-set fmri(conpic_orig.4) 1
-
-# Title for contrast_orig 4
-set fmri(conname_orig.4) ""
-
-# Real contrast_orig vector 4 element 1
-set fmri(con_orig4.1) 0
-
-# Real contrast_orig vector 4 element 2
-set fmri(con_orig4.2) -1.0
-
 # Contrast masking - use >0 instead of thresholding?
 set fmri(conmask_zerothresh_yn) 0
-
-# Mask real contrast/F-test 1 with real contrast/F-test 2?
-set fmri(conmask1_2) 0
-
-# Mask real contrast/F-test 1 with real contrast/F-test 3?
-set fmri(conmask1_3) 0
-
-# Mask real contrast/F-test 1 with real contrast/F-test 4?
-set fmri(conmask1_4) 0
-
-# Mask real contrast/F-test 2 with real contrast/F-test 1?
-set fmri(conmask2_1) 0
-
-# Mask real contrast/F-test 2 with real contrast/F-test 3?
-set fmri(conmask2_3) 0
-
-# Mask real contrast/F-test 2 with real contrast/F-test 4?
-set fmri(conmask2_4) 0
-
-# Mask real contrast/F-test 3 with real contrast/F-test 1?
-set fmri(conmask3_1) 0
-
-# Mask real contrast/F-test 3 with real contrast/F-test 2?
-set fmri(conmask3_2) 0
-
-# Mask real contrast/F-test 3 with real contrast/F-test 4?
-set fmri(conmask3_4) 0
-
-# Mask real contrast/F-test 4 with real contrast/F-test 1?
-set fmri(conmask4_1) 0
-
-# Mask real contrast/F-test 4 with real contrast/F-test 2?
-set fmri(conmask4_2) 0
-
-# Mask real contrast/F-test 4 with real contrast/F-test 3?
-set fmri(conmask4_3) 0
 
 # Do contrast masking at all?
 set fmri(conmask1_1) 0
