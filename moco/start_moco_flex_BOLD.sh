@@ -17,10 +17,11 @@ cnt=$(($cnt+1))
 done
 
 
-#export DYLD_FALLBACK_LIBRARY_PATH="/Users/l.huber/repository/moco/:$DYLD_LIBRARY_PATH"
-cp /Users/l.huber/repository/moco/mocobatch_BOLD_flex.m ./
-/Applications/MATLAB_2019b.app/bin/matlab -nodesktop -nosplash -r "mocobatch_BOLD_flex"
 
-gnuplot "/Users/l.huber/repository/moco/gnuplot_moco_BOLD.txt"
+#export DYLD_FALLBACK_LIBRARY_PATH="/Users/l.huber/repository/moco/:$DYLD_LIBRARY_PATH"
+cp /Users/administrator/Git/repository/moco/mocobatch_BOLD_flex.m ./
+/Applications/MATLAB_R2022a.app/bin/matlab -nodesktop -nosplash -r "mocobatch_BOLD_flex"
+
+gnuplot "/Users/administrator/Git/repository/moco/gnuplot_moco_BOLD.txt"
 
 rm ./Basis_*.nii
