@@ -2,16 +2,17 @@
 
 
 #set terminal qt enhanced 40
-set terminal postscript enhanced color solid  "Helvetica" 10
+#set terminal postscript enhanced color solid  "Helvetica" 10
 
-set out "motion.ps"
+set terminal png nocrop enhanced size 1000,600 font "arial,12.0"
+set out "motion.png"
 
 set key left bottom # für Position of Legend
 
 
-set title "Motion across timesteps"   font "Helvetica,10"
-set ylabel "displacement in mm"  font "Helvetica,10"
-set xlabel "|time in TR"  font "Helvetica,10"
+set title "Motion across timesteps"   
+set ylabel "displacement in mm"  
+set xlabel "|time in TR" 
 #set xrange [-2:2]
 #set yrange [-1:1]
 set size ratio 0.6
@@ -20,11 +21,24 @@ set size ratio 0.6
 #set xtics (  "{/Symbol D} T" -85.37  , "-60.98" -60.98,  "-36.59" -36.59,  "-12.2" -12.2, "0" 0, "12.2" 12.2,  "36.59" 36.59,  "60.98" 60.98, "85.37" 85.37 )
 
 
-plot 	"rp_Basis_0a.txt" u 0:1  with lines  title "Not_nulled x"  linecolor rgb "green" ,\
-	"rp_Basis_0a.txt" u 0:2  with lines  title "Not_nulled y"  linecolor rgb "red" ,\
-	"rp_Basis_0a.txt" u 0:3  with lines  title "Not_nulled z"  linecolor rgb "brown" 
+plot 	"rp_Basis_bold_1.txt" u 0:1  with lines  title "BOLD x"  linecolor rgb "green" ,\
+	"rp_Basis_bold_1.txt" u 0:2  with lines  title "BOLD y"  linecolor rgb "red" ,\
+	"rp_Basis_bold_1.txt" u 0:3  with lines  title "BOLD z"  linecolor rgb "brown" 
 
-#replot "plochsim_5_ohne.csv" using 1 with lines title "with eddy currents and  {/Symbol t} = 0.2 ms" linecolor rgb "blue"
+
+
+
+set terminal eps
+set out "motion.eps"
+set key left bottom # für Position of Legend
+set title "Motion across timesteps"   
+set ylabel "displacement in mm"  
+set xlabel "|time in TR" 
+set size ratio 0.6
+plot 	"rp_Basis_bold_1.txt" u 0:1  with lines  title "BOLD x"  linecolor rgb "green" ,\
+	"rp_Basis_bold_1.txt" u 0:2  with lines  title "BOLD y"  linecolor rgb "red" ,\
+	"rp_Basis_bold_1.txt" u 0:3  with lines  title "BOLD z"  linecolor rgb "brown" 
+
 
 set term qt
 exit

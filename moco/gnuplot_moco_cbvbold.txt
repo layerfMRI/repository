@@ -1,0 +1,53 @@
+#aufrufen mit load "./gnuplot.txt"
+
+
+#set terminal qt enhanced 40
+#set terminal postscript enhanced color solid  "Helvetica" 10
+
+set terminal png nocrop enhanced size 1000,600 font "arial,12.0"
+set out "motion.png"
+
+set key left bottom # für Position of Legend
+
+
+set title "Motion across timesteps"   
+set ylabel "displacement in mm"  
+set xlabel "|time in TR" 
+#set xrange [-2:2]
+#set yrange [-1:1]
+set size ratio 0.6
+#set grid
+#set ytics ("0" 0 , "1" 1, "-1" -1) 
+#set xtics (  "{/Symbol D} T" -85.37  , "-60.98" -60.98,  "-36.59" -36.59,  "-12.2" -12.2, "0" 0, "12.2" 12.2,  "36.59" 36.59,  "60.98" 60.98, "85.37" 85.37 )
+
+
+plot 	"rp_Basis_bold_1.txt" u 0:1  with lines  title "Not-nulled x"  linecolor rgb "green" ,\
+	"rp_Basis_bold_1.txt" u 0:2  with lines  title "Not-nulled y"  linecolor rgb "red" ,\
+	"rp_Basis_bold_1.txt" u 0:3  with lines  title "Not-nulled z"  linecolor rgb "brown" ,\
+	"rp_Basis_cbv_1.txt" u 0:1  with lines  title "nulled x"  linecolor rgb "turquoise" ,\
+	"rp_Basis_cbv_1.txt" u 0:2  with lines  title "nulled y"  linecolor rgb "pink" ,\
+	"rp_Basis_cbv_1.txt" u 0:3  with lines  title "nulled z"  linecolor rgb "black" 
+
+
+
+
+set terminal eps
+set out "motion.eps"
+set key left bottom # für Position of Legend
+set title "Motion across timesteps"   
+set ylabel "displacement in mm"  
+set xlabel "|time in TR" 
+set size ratio 0.6
+plot 	"rp_Basis_bold_1.txt" u 0:1  with lines  title "Not-nulled x"  linecolor rgb "green" ,\
+	"rp_Basis_bold_1.txt" u 0:2  with lines  title "Not-nulled y"  linecolor rgb "red" ,\
+	"rp_Basis_bold_1.txt" u 0:3  with lines  title "Not-nulled z"  linecolor rgb "brown" ,\
+	"rp_Basis_cbv_1.txt" u 0:1  with lines  title "nulled x"  linecolor rgb "turquoise" ,\
+	"rp_Basis_cbv_1.txt" u 0:2  with lines  title "nulled y"  linecolor rgb "pink" ,\
+	"rp_Basis_cbv_1.txt" u 0:3  with lines  title "nulled z"  linecolor rgb "black" 
+
+
+set term qt
+exit
+
+
+
