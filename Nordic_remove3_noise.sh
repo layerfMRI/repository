@@ -4,10 +4,7 @@ echo "fange an"
 
 
 NumVol=`3dinfo -nv $1`
-
-
 echo $NumVol
-
 3dcalc -overwrite -prefix NoNoise_$1  -a $1'[0..'`expr $NumVol - 4`']'  -expr 'a'
 
 
