@@ -32,7 +32,7 @@ echo $NumVol
 
 # perform BOCO with VASO image first
 LN_BOCO -Nulled Nulled_intemp.nii.gz -BOLD  BOLD_intemp.nii.gz 
-3dCopy VASO_LN.nii VASO_intemp.nii.gz
+3dCopy VASO_LN.nii VASO_intemp.nii.gz -overwrite
 rm VASO_LN.nii 
 
 # quality stats
