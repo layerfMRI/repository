@@ -42,12 +42,12 @@ rm VASO_LN.nii
 3dTstat -overwrite -cvarinv -prefix VASO.tSNR.nii.gz \ VASO_intemp.nii.gz'[1..$]'
 
 # adjust TR in header
-3drefit -TR 2.571 BOLD_intemp.nii.gz
-3drefit -TR 2.571 VASO_intemp.nii.gz
+3drefit -TR 1.5 BOLD_intemp.nii.gz
+3drefit -TR 1.5 VASO_intemp.nii.gz
 
 # downsample VASO in time and adjust TR in header
 3dcalc -a VASO_intemp.nii'[0..$(2)]' -expr 'a' -prefix VASO.nii.gz -overwrite
-3drefit -TR 5.142 VASO_intemp.nii.gz
+3drefit -TR 3 VASO.nii.gz
 
 # denoising of T1 outside
 LN_MP2RAGE_DNOISE -INV1 mean_nulled.nii.gz -INV2 mean_notnulled.nii.gz -UNI T1_weighted.nii.gz -beta 5
