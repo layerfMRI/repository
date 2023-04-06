@@ -54,7 +54,7 @@ set ttt = 020
     -1Dmatrix_save  ALLIN_bold_${cnt}.aff12.1D                                    \
     -cost           lpa                                                      \
     -prefix         moco_Basis_bold_${cnt}.nii                                 \
-    -base           n_reference.nii                                           \
+    -base           nn_reference.nii                                           \
     -source         Basis_bold_${cnt}.nii                                      \
     -weight         moma.nii                                      \
     -warp           shift_rotate                                             \
