@@ -5,12 +5,11 @@
 function NORDIC_executing (pathtofile)
 display(pathtofile);
 
-
                 ARG.NORDIC=1;
                 RG.noise_volume_last = 0;
                 ARG.save_add_info =1;
                 ARG.magnitude_only=1;
-                ARG.factor_error=1.2
+                ARG.factor_error=1.5
                 %ARG.MP = 2; 
                 ARG.kernel_size_PCA = [10, 10, 10]; 
 
