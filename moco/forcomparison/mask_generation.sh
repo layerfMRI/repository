@@ -7,7 +7,7 @@
 # create weight, essentially an "inner" block (smoothed at the
 # boundary) to remove influence of differing FOV coverage
 
-3dautomask -prefix moma.nii -peels 3 -dilate 2 *_bold*.nii
+3dautomask -prefix moma.nii -peels 3 -dilate 2 *_bold*.nii.gz
 
 
 3dZeropad -A -4 -P -4 -I -4 -S -4 -R -4 -L -4 \
@@ -38,4 +38,4 @@ rm *_tmp_*
 
 
 # optional: fixing oblique header and removing outer slice 
-3dcalc -a n_reference.nii -b moma.nii -expr 'b*step(b-35)' -prefix momaorient.nii
+3dcalc -overwrite -b weight_gauss.nii.gz -expr 'step(b-35)' -prefix moma.nii.gz

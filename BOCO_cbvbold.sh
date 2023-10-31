@@ -42,8 +42,8 @@ rm VASO_LN.nii
 3dTstat -overwrite -cvarinv -prefix VASO.tSNR.nii.gz \ VASO_intemp.nii.gz'[1..$]'
 
 # adjust TR in header
-3drefit -TR 1.5 BOLD_intemp.nii.gz
-3drefit -TR 1.5 VASO_intemp.nii.gz
+3drefit -TR 2.5 BOLD_intemp.nii.gz
+3drefit -TR 2.5 VASO_intemp.nii.gz
 
 # downsample VASO in time and adjust TR in header
 3dcalc -a VASO_intemp.nii'[0..$(2)]' -expr 'a' -prefix VASO.nii.gz -overwrite
