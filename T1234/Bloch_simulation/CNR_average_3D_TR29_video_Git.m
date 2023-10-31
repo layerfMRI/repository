@@ -1,14 +1,11 @@
 clc, clearvars, close all;
 
-% This update is based on latest scann protocol parameters: TR 28.5(29
-% msec) and 124 TR
-
 %Parameters
-TR = 29; % msec, previously 36
+TR = 29; 
 max_flip_angle_1 = 50;  max_flip_angle_2 = 50;
 
 Inv_flip_angle = 180;
-NumTR = 124; % previously 120
+NumTR = 124; 
 NumAcq = 1;
 RelaxDelay = 0;
 InvPulse = 1;
@@ -116,8 +113,7 @@ increment_ng_W = 2;
   
         end
 %CNR
-    %CNR = abs(MxG_noGap(30)/MxG_noGap(90) - MxW_noGap(30)/MxW_noGap(90)) / sqrt((1/MxG_noGap(90))^2 + (-MxG_noGap(30)/MxG_noGap(90)^2)^2 + (-1/MxW_noGap(90))^2 + (MxW_noGap(30)/MxW_noGap(90)^2)^2);
-    %CNR = abs(MxG_noGap(30)/MxG_noGap(90) - MxW_noGap(30)/MxW_noGap(90)) / sqrt((MxG_noGap(30)/MxG_noGap(90))^2 + (MxG_noGap(90)*(-MxG_noGap(30))/MxG_noGap(90)^2)^2 + (-MxW_noGap(30)/MxW_noGap(90))^2 + (MxW_noGap(90)*MxW_noGap(30)/MxW_noGap(90)^2)^2);
+    
         for k = 1 : NumTR/2
 
         CN_all(k) = abs(MxG_noGap(k)/MxG_noGap(k + NumTR/2) - MxW_noGap(k)/MxW_noGap(k + NumTR/2)) / sqrt((1/MxG_noGap(k + NumTR/2))^2 + (-MxG_noGap(k)/MxG_noGap(k + NumTR/2)^2)^2 + (-1/MxW_noGap(k + NumTR/2))^2 + (MxW_noGap(k)/MxW_noGap(k + NumTR/2)^2)^2);

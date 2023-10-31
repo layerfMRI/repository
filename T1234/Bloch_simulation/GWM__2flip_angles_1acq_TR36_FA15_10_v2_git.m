@@ -1,16 +1,13 @@
 clc, clearvars, close all;
 
-% update TR, , number of TR and flip angles
-% add Mz_postInv_W formula
-
-NumTR = 124; % 120 previously
-TR = 36; % msec, 36 previously
+NumTR = 124;
+TR = 29; 
 
 Acq_Time = NumTR*TR;
 MzG=zeros(1,Acq_Time); MzW=zeros(1,Acq_Time);
 MxG=zeros(1,Acq_Time); MxW=zeros(1,Acq_Time);
 FA=zeros(1,Acq_Time);
-Flip_angle_1 = 15;  Flip_angle_2 = 10; % 10 and 20 previously
+Flip_angle_1 = 11;  Flip_angle_2 = 15; 
 FA(1) = Flip_angle_1;
 
 for i=TR + 1 : TR : Acq_Time/2
