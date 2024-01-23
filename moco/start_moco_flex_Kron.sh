@@ -20,7 +20,7 @@ done
 
 #export DYLD_FALLBACK_LIBRARY_PATH="/Users/l.huber/repository/moco/:$DYLD_LIBRARY_PATH"
 cp /Users/l.huber/repository/moco/mocobatch_VASO_flex.m ./
-/Applications/MATLAB_R2022a.app/bin/matlab  -nodesktop -nosplash -r "mocobatch_BOLD_flex"
-gnuplot "/Users/l.huber/repository/moco/gnuplot_moco.txt"
+/Applications/MATLAB_R2023a.app/bin/matlab  -nodesktop -nosplash -r "mocobatch_BOLD_flex"
+gnuplot "/Users/huberl/repository/moco/gnuplot_moco.txt"
 
 rm ./Basis_*.nii

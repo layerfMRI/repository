@@ -1,13 +1,11 @@
 #!/bin/bash
 
 
-3dautomask -prefix moma.nii.gz -peels 3 -dilate 2 S*_bold*.nii.gz
-
 #just in case there is already a proken file from previous unsuccessfull attempts.
 rm NT.txt
 
 cnt=1
-for filename in ./S*_cbv*.nii.gz
+for filename in ./S*_cbv*.nii
 do
 echo $filename
 3dCopy $filename ./Basis_cbv_${cnt}.nii -overwrite
@@ -17,7 +15,7 @@ cnt=$(($cnt+1))
 done
 
 cnt=1
-for filename in ./S*_bold*.nii.gz
+for filename in ./S*_bold*.nii
 do
 echo $filename
 3dCopy $filename ./Basis_bold_${cnt}.nii -overwrite
@@ -26,10 +24,8 @@ echo $filename
 cnt=$(($cnt+1))
 done
 
-cp /Users/administrator/Git/repository/moco/mocobatch_cbvbold.m ./
 
-
-/Applications/MATLAB_R2023a.app/bin/matlab  -nodesktop -nosplash -r "mocobatch_cbvbold"
+/Applications/MATLAB_R2022a.app/bin/matlab  -nodesktop -nosplash -r "mocobatch_cbvbold"
 gnuplot "/Users/administrator/Git/repository/moco/gnuplot_moco_cbvbold.txt"
 
 rm ./Basis_*.nii ./Basis_*.mat

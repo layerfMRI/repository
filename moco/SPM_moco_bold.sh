@@ -21,7 +21,7 @@ done
 cp /Users/administrator/Git/repository/moco/mocobatch_bold.m ./
 
 
-/Applications/MATLAB_R2022a.app/bin/matlab  -nodesktop -nosplash -r "mocobatch_bold"
+/Applications/MATLAB_R2023a.app/bin/matlab  -nodesktop -nosplash -r "mocobatch_bold"
 gnuplot "/Users/administrator/Git/repository/moco/gnuplot_moco_bold.txt"
 
 rm ./Basis_*.nii ./Basis_*.mat

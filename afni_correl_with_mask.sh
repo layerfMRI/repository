@@ -2,7 +2,7 @@
 
 
 #extraxting time time course of ROI
-3dROIstats -mask $2 -quiet -1DRformat  -nzmean $1 > timecourse.txt
+3dROIstats -mask $2 -quiet -1DRformat $1 > timecourse.txt
 
 # looking at it
 #1dplot  timecourse.txt
