@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Adapted from https://github.com/layerfMRI/repository/blob/master/moco/forcomparison/AFNI/AFNI_moco_cbvbold.sh
-# Credit: Renzo Huber NIH, Paul Taylor NIH
+# Credit: Renzo Huber NIH, Paul Taylor NIH, Marco Barilari UCLouain
 #
 # Scipt actions:
 # (1) removes the nordic noise scans (assuming are 2 vols at the end)
