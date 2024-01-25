@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Adapted from https://github.com/layerfMRI/repository/blob/master/moco/forcomparison/AFNI/AFNI_moco_cbvbold.sh
-# Credit: Renzo Huber
+# Credit: Renzo Huber NIH, Paul Taylor NIH
 
 # stop on first error
 set -e
@@ -32,7 +32,7 @@ for filename in ${output_dir}/sub*nordic_nulled.nii; do
     NumVol=`3dinfo -nv $filename`
 
     3dTcat \
-        -prefix ${output_dir}/Basis_cbv_${cnt}.nii \
+        -prefix ${output_dir}/sub-${subID}_Basis_cbv_${cnt}.nii \
         $filename'[0..'`expr $NumVol - 3`']' \
         -overwrite
 
@@ -42,28 +42,42 @@ for filename in ${output_dir}/sub*nordic_nulled.nii; do
     # 3dTcat -prefix Basis_cbv_${cnt}.nii Basis_cbv_${cnt}.nii'[2..3]' Basis_cbv_${cnt}.nii'[2..$]' -overwrite
 
     # if [$cnt == 1]; then
-        3dMean -prefix ${output_dir}/n_reference.nii ${output_dir}/Basis_cbv_1.nii'[0..3]'
+        3dMean -prefix ${output_dir}/n_reference.nii ${output_dir}/sub-${subID}_Basis_cbv_1.nii'[0..3]'
     # fi
 
     mask_name="${output_dir}/sub-${subID}_ses-${sesID}_task-${taskID}_run-0${cnt}_desc-brainMask_space-EPI_mask.nii"
 
     # set ttt = 020
     3dAllineate \
-        -1Dmatrix_save  ${output_dir}/ALLIN_cbv_${cnt}.aff12.1D \
-        -1Dparam_save   ${output_dir}/ALLIN_cbv_${cnt}.aff12 \
+        -1Dmatrix_save  ${output_dir}/sub-${subID}_ALLIN_cbv_${cnt}.aff12.1D \
+        -1Dparam_save   ${output_dir}/sub-${subID}_ALLIN_cbv_${cnt}.aff12 \
         -cost           lpa \
-        -prefix         ${output_dir}/moco_Basis_cbv_${cnt}.nii \
+        -prefix         ${output_dir}/sub-${subID}_moco_Basis_cbv_${cnt}.nii \
         -base           ${output_dir}/n_reference.nii \
-        -source         ${output_dir}/Basis_cbv_${cnt}.nii \
+        -source         ${output_dir}/sub-${subID}_Basis_cbv_${cnt}.nii \
         -weight         ${mask_name} \
         -warp           shift_rotate \
         -final          wsinc5
     # remove the -warp line to make it an affine transformation. 
 
-    fslcpgeom ${output_dir}/Basis_cbv_${cnt}.nii ${output_dir}/moco_Basis_cbv_${cnt}.nii 
+    ###fslcpgeom ${output_dir}/Basis_cbv_${cnt}.nii ${output_dir}/moco_Basis_cbv_${cnt}.nii 
+    
+    if [[ $(3dinfo -is_oblique ${output_dir}/n_reference.nii) == 1 ]]; then
 
+        # copy the full matrix from ref dset to the copy, essentially "putting back" any obliquity
+        # info that might have been purged by 3dAllineate
 
-    cp ${output_dir}/ALLIN_cbv_${cnt}.aff12.param.1D ${output_dir}/ALLIN_cbv_${cnt}.aff12.param.txt
+        echo ""
+        echo "correcting for possible output misplacement"
+        echo ""
+
+        3drefit \
+            -atrcopy ${output_dir}/n_reference.nii IJK_TO_DICOM_REAL \
+            ${output_dir}/sub-${subID}_moco_Basis_cbv_${cnt}.nii
+
+    fi 
+
+    cp ${output_dir}/sub-${subID}_ALLIN_cbv_${cnt}.aff12.param.1D ${output_dir}/sub-${subID}_ALLIN_cbv_${cnt}.aff12.param.txt
 
     cnt=$(($cnt+1))
 
@@ -80,7 +94,7 @@ for filename in ${output_dir}/sub*nordic_notnulled.nii ; do
     echo ""
     
     3dTcat \
-        -prefix ${output_dir}/Basis_bold_${cnt}.nii \
+        -prefix ${output_dir}/sub-${subID}_Basis_bold_${cnt}.nii \
         $filename'[0..'`expr $NumVol - 3`']' \
         -overwrite
 
@@ -88,27 +102,40 @@ for filename in ${output_dir}/sub*nordic_notnulled.nii ; do
     # 3dTcat -prefix Basis_bold_${cnt}.nii Basis_bold_${cnt}.nii'[2..3]' Basis_bold_${cnt}.nii'[2..$]' -overwrite
     
     # if [cnt == 1]; then
-        3dMean -prefix ${output_dir}/nn_reference.nii ${output_dir}/Basis_bold_1.nii'[1..3]'
+        3dMean -prefix ${output_dir}/nn_reference.nii ${output_dir}/sub-${subID}_Basis_bold_1.nii'[1..3]'
     # fi
 
     mask_name="${output_dir}/sub-${subID}_ses-${sesID}_task-${taskID}_run-0${cnt}_desc-brainMask_space-EPI_mask.nii"
 
-    set ttt = 020
     3dAllineate \
-        -1Dmatrix_save  ${output_dir}/ALLIN_bold_${cnt}.aff12.1D \
-        -1Dparam_save   ${output_dir}/ALLIN_bold_${cnt}.aff12 \
+        -1Dmatrix_save  ${output_dir}/sub-${subID}_ALLIN_bold_${cnt}.aff12.1D \
+        -1Dparam_save   ${output_dir}/sub-${subID}_ALLIN_bold_${cnt}.aff12 \
         -cost           lpa \
-        -prefix         ${output_dir}/moco_Basis_bold_${cnt}.nii \
+        -prefix         ${output_dir}/sub-${subID}_moco_Basis_bold_${cnt}.nii \
         -base           ${output_dir}/nn_reference.nii \
-        -source         ${output_dir}/Basis_bold_${cnt}.nii \
+        -source         ${output_dir}/sub-${subID}_Basis_bold_${cnt}.nii \
         -weight         ${mask_name} \
         -warp           shift_rotate \
         -final          wsinc5
     # remove the -warp line to make it an affine transformation. 
 
-    fslcpgeom ${output_dir}/Basis_bold_${cnt}.nii ${output_dir}/moco_Basis_bold_${cnt}.nii 
+    # fslcpgeom ${output_dir}/Basis_bold_${cnt}.nii ${output_dir}/moco_Basis_bold_${cnt}.nii 
 
-    cp ${output_dir}/ALLIN_bold_${cnt}.aff12.param.1D ${output_dir}/ALLIN_bold_${cnt}.aff12.param.txt
+    if [[ $(3dinfo -is_oblique ${output_dir}/nn_reference.nii) == 1 ]]; then
+        # copy the full matrix from ref dset to the copy, essentially "putting back" any obliquity
+        # info that might have been purged by 3dAllineate
+
+        echo ""
+        echo "correcting for possible output misplacement"
+        echo ""
+
+        3drefit \
+            -atrcopy ${output_dir}/n_reference.nii IJK_TO_DICOM_REAL \
+            ${output_dir}/sub-${subID}_moco_Basis_bold_${cnt}.nii
+
+    fi 
+
+    cp ${output_dir}/sub-${subID}_ALLIN_bold_${cnt}.aff12.param.1D ${output_dir}/sub-${subID}_ALLIN_bold_${cnt}.aff12.param.txt
 
     cnt=$(($cnt+1))
 
