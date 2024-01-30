@@ -23,6 +23,7 @@ echo "$sdelta_z"
 echo "und tschuess"
 
  
+3drefit  -atrcopy $1 IJK_TO_DICOM_REAL scaled_$1
 
 
 #alternative ResampleImage 3 inputImage.nii.gz outputImage.nii.gz  0.4x0.4x0.4 0 3['l'] 6
