@@ -17,9 +17,28 @@ nthvol=$(($basevol + $n_vols - 1)) # Zero indexing
 echo "doing the alignemt"
 for i in $(eval echo "{$basevol..$nthvol}");
 do
-antsRegistrationSyN.sh -d 3 -f vol_1000.nii -m vol_${i}.nii -o vol_${i}_ -t a -n 30 -p f -j 1 -e 42
+		antsRegistration \
+		--verbose 1  \
+		--random-seed 42  \
+		--dimensionality 3  \
+		--float 1  \
+		--collapse-output-transforms 1  \
+		--output [vol_${i}_,vol_${i}_Warped.nii.gz,vol_${i}_InverseWarped.nii.gz]  \
+		--interpolation BSpline[4]  \
+		--use-histogram-matching 1  \
+		--winsorize-image-intensities [0.005,0.995]  \
+		--initial-moving-transform [vol_1000.nii,vol_${i}.nii,1]  \
+		--transform Rigid[0.1]  \
+		--metric MI[vol_1000.nii,vol_${i}.nii,1,32,Regular,0.25]  \
+		--convergence [250x100,1e-6,10]  \
+		--shrink-factors 2x1  \
+		--smoothing-sigmas 3x2vox  \
+		--transform Affine[0.1]  \
+		--metric MI[vol_1000.nii,vol_${i}.nii,1,32,Regular,0.25]  \
+		--convergence [250x100,1e-6,10]  \
+		--shrink-factors 2x1  \
+		--smoothing-sigmas 1x0voxdone
 done
-
 echo "reassembling the time points"
 ImageMath 4 moco_$1 TimeSeriesAssemble $tr vol_*_Warped.nii.gz
 

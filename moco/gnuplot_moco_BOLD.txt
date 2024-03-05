@@ -21,9 +21,9 @@ set size ratio 0.6
 #set xtics (  "{/Symbol D} T" -85.37  , "-60.98" -60.98,  "-36.59" -36.59,  "-12.2" -12.2, "0" 0, "12.2" 12.2,  "36.59" 36.59,  "60.98" 60.98, "85.37" 85.37 )
 
 
-plot 	"rp_Basis_bold_1.txt" u 0:1  with lines  title "BOLD x"  linecolor rgb "green" ,\
-	"rp_Basis_bold_1.txt" u 0:2  with lines  title "BOLD y"  linecolor rgb "red" ,\
-	"rp_Basis_bold_1.txt" u 0:3  with lines  title "BOLD z"  linecolor rgb "brown" 
+plot 	"rp_Basis_0a.txt" u 0:1  with lines  title "BOLD x"  linecolor rgb "green" ,\
+	"rp_Basis_0a.txt" u 0:2  with lines  title "BOLD y"  linecolor rgb "red" ,\
+	"rp_Basis_0a.txt" u 0:3  with lines  title "BOLD z"  linecolor rgb "brown" 
 
 
 

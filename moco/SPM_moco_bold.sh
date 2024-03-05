@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-3dautomask -prefix moma.nii.gz -peels 3 -dilate 2 S*_bold*.nii.gz
+3dautomask -prefix moma.nii -peels 3 -dilate 2 S*_bold*.nii.gz
 
 #just in case there is already a proken file from previous unsuccessfull attempts.
 rm NT.txt

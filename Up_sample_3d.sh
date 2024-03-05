@@ -21,7 +21,7 @@ echo "$sdelta_z"
 
 3dcalc -a scaled_$1 -datum short -gscale -expr 'a' -prefix scaled_$1 -overwrite
 
-3drefit  -atrcopy $1 IJK_TO_DICOM_REAL scaled_$1
+3drefit -atrcopy $1 IJK_TO_DICOM_REAL scaled_$1
 
 
 #alternative ResampleImage 3 inputImage.nii.gz outputImage.nii.gz  0.25x0.25x0.25 0 3['l'] 6
