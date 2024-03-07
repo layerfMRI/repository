@@ -7,7 +7,37 @@
 # create weight, essentially an "inner" block (smoothed at the
 # boundary) to remove influence of differing FOV coverage
 
-3dAutomask -prefix moma.nii.gz -peels 3 -dilate 2  S*_cbv*.nii.gz
+3dautomask -prefix moma.nii.gz -peels 3 -dilate 2 *_bold*.nii.gz
+
+
+3dZeropad -A -4 -P -4 -I -4 -S -4 -R -4 -L -4 \
+    -overwrite                                \
+    -prefix _tmp_AAA.nii.gz                   \
+      moma.nii.gz
+
+3dcalc                           \
+    -overwrite                   \
+    -a           _tmp_AAA.nii.gz \
+    -expr        '100*a'           \
+    -prefix      _tmp_BBB.nii.gz \
+    -datum       short
+
+3dZeropad                                     \
+    -overwrite                                \
+    -master         moma.nii.gz      \
+    -prefix         _tmp_CCC.nii.gz           \
+    _tmp_BBB.nii.gz 
+
+3dmerge                                       \
+    -overwrite                                \
+    -1blur_sigma    3                         \
+    -prefix         weight_gauss.nii.gz       \
+    _tmp_CCC.nii.gz
+
+rm *_tmp_*
+
+3dcalc -overwrite -b weight_gauss.nii.gz -expr 'step(b-85)' -prefix moma.nii.gz
+
 
 # calculate mot alignment, with *solid body (6 DOF)*
 cnt=100
@@ -18,7 +48,7 @@ do
 echo $filename
 3dCopy $filename ./Basis_cbv_${cnt}.nii -overwrite
 #3dTcat -prefix Basis_cbv_${cnt}.nii Basis_cbv_${cnt}.nii'[2..3]' Basis_cbv_${cnt}.nii'[2..$]' -overwrite
-3dMean -prefix n_reference.nii.gz Basis_cbv_${cnt}.nii'[3..5]'
+3dTstat -prefix n_reference.nii.gz Basis_cbv_${cnt}.nii'[1..3]'
 
 
 set ttt = 020
@@ -47,7 +77,7 @@ do
 echo $filename
 3dCopy $filename ./Basis_bold_${cnt}.nii -overwrite
 #3dTcat -prefix Basis_bold_${cnt}.nii Basis_bold_${cnt}.nii'[2..3]' Basis_bold_${cnt}.nii'[2..$]' -overwrite
-3dMean -prefix nn_reference.nii.gz Basis_bold_${cnt}.nii'[3..5]'
+3dTstat -prefix nn_reference.nii.gz Basis_bold_${cnt}.nii'[1..3]'
 
 
 set ttt = 020
