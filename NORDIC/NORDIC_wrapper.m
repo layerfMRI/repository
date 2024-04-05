@@ -9,7 +9,7 @@ display(pathtofile);
                 RG.noise_volume_last = 0;
                 ARG.save_add_info =1;
                 ARG.magnitude_only=1;
-                ARG.factor_error=1.5
+                ARG.factor_error=1.2
                 %ARG.MP = 2; 
                 ARG.kernel_size_PCA = [10, 10, 10]; 
 
