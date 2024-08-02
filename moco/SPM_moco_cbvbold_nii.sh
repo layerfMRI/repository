@@ -29,7 +29,7 @@ done
 cp /Users/administrator/Git/repository/moco/mocobatch_cbvbold.m ./
 
 
-/Applications/MATLAB_R2023a.app/bin/matlab  -nodesktop -nosplash -r "mocobatch_cbvbold"
+/Applications/MATLAB_R2023b.app/bin/matlab  -nodesktop -nosplash -r "mocobatch_cbvbold"
 gnuplot "/Users/administrator/Git/repository/moco/gnuplot_moco_cbvbold.txt"
 
 rm ./Basis_*.nii ./Basis_*.mat
