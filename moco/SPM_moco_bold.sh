@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-3dautomask -prefix moma.nii -peels 3 -dilate 2 S*_bold*.nii.gz
+3dautomask -prefix moma.nii -peels 3 -dilate 2 S*.nii.gz
 
 #just in case there is already a proken file from previous unsuccessfull attempts.
 rm NT.txt
@@ -9,7 +9,7 @@ rm NT.txt
 cnt=1
 
 cnt=1
-for filename in ./S*_bold*.nii.gz
+for filename in ./S*.nii.gz
 do
 echo $filename
 3dCopy $filename ./Basis_bold_${cnt}.nii -overwrite
