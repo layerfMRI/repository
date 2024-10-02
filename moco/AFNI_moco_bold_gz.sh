@@ -7,7 +7,7 @@
 # create weight, essentially an "inner" block (smoothed at the
 # boundary) to remove influence of differing FOV coverage
 
-3dautomask -prefix moma.nii -peels 3 -dilate 2 S*.nii
+3dautomask -prefix moma.nii -peels 3 -dilate 2 S*.nii.gz
 
 
 3dZeropad -A -4 -P -4 -I -4 -S -4 -R -4 -L -4 \
@@ -45,21 +45,21 @@ rm *_tmp_*
 cnt=100
 echo "starting file loop nulled"
 
-for filename in ./S*.nii
+for filename in S*.nii.gz
 do
 echo $filename
-3dCopy $filename ./Basis_${cnt}.nii -overwrite
-3dMean -prefix n_reference.nii Basis_${cnt}.nii'[3..5]'
+#3dCopy $filename ./Basis_${cnt}.nii -overwrite
+3dMean -prefix n_reference.nii $filename'[2..3]'
 
 
 set ttt = 020
 3dAllineate                                                                  \
-    -1Dmatrix_save  ALLIN_cbv_${cnt}.aff12.1D                                    \
+    -1Dmatrix_save  ALLIN_$filename.aff12.1D                                    \
     -cost           lpa                                                      \
-    -prefix         moco_Basis_${cnt}.nii                                 \
+    -prefix         moco_${filename}                                 \
     -base           n_reference.nii                                           \
-    -source         Basis_${cnt}.nii                                      \
-    -weight         moma.nii                                   \
+    -source         ${filename}                                     \
+    -weight         moma.nii                                   \ 
     -warp           shift_rotate                                             \ 
     -final          wsinc5
 # remove the -warp line to make it an affine transformation. 
