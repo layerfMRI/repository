@@ -7,7 +7,7 @@ display(pathtofile);
 
 
                 ARG.NORDIC=1;
-                RG.noise_volume_last = 1;
+                ARG.noise_volume_last = 1;
                 ARG.save_add_info =1;
                 ARG.magnitude_only=1;
                 ARG.factor_error=1.2

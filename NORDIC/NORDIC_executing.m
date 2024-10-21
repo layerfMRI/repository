@@ -6,7 +6,7 @@ pathNORDIC=['/Volumes/Redthin/NIH_MRI/20230106_DAN/NORDIC/'];
 cd(pathNORDIC) % working inside the data folder
                 
                 ARG.NORDIC=1;
-                RG.noise_volume_last = 1;
+                ARG.noise_volume_last = 1;
                 ARG.save_add_info =1;
                 ARG.magnitude_only=1;
                 %ARG.MP = 2; 

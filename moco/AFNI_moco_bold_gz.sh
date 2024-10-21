@@ -60,8 +60,9 @@ set ttt = 020
     -base           n_reference.nii                                           \
     -source         ${filename}                                     \
     -weight         moma.nii                                   \ 
-    -warp           shift_rotate                                             \ 
-    -final          wsinc5
+    -overwrite						\
+    -final          wsinc5							
+#    -warp           shift_rotate                                             \ 
 # remove the -warp line to make it an affine transformation. 
 
 cnt=$(($cnt+1))
