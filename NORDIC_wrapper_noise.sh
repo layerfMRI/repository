@@ -2,7 +2,7 @@
 
 echo "fange an"
 
-for filename in S*.nii
+for filename in S*.nii.gz
 do
 
 

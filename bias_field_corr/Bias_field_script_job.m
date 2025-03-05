@@ -3,8 +3,6 @@
 % spm SPM - SPM12 (6906)
 % cfg_basicio BasicIO - Unknown
 %-----------------------------------------------------------------------
-
-addpath(genpath('/Users/administrator/spm12'));
 matlabbatch{1}.spm.spatial.preproc.channel.vols = {'./uncorr.nii,1'};
 matlabbatch{1}.spm.spatial.preproc.channel.biasreg = 0.001;
 matlabbatch{1}.spm.spatial.preproc.channel.biasfwhm = 20;

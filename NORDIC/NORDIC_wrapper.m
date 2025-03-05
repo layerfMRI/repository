@@ -12,6 +12,7 @@ display(pathtofile);
                 ARG.factor_error=1.2
                 %ARG.MP = 2; 
                 ARG.kernel_size_PCA = [10, 10, 10]; 
+                ARG.write_gzipped_niftis=1;
 
                 fn_magn_in=pathtofile;
                 fn_phase_in=fn_magn_in;
