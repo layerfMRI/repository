@@ -16,12 +16,9 @@ cp /Users/administrator/Git/repository/NORDIC/NIFTI_NORDIC.m ./
 ###Remove last noise scan
 
 
-NumVol=`3dinfo -nv ${filename}`
-
-
-echo $NumVol
-
-3dcalc -overwrite -prefix NoNoise_${filename}  -a NORDIC_${filename}'[0..'`expr $NumVol - 3`']'  -expr 'a'
+#NumVol=`3dinfo -nv ${filename}`
+#echo $NumVol
+#3dcalc -overwrite -prefix NoNoise_${filename}  -a NORDIC_${filename}'[0..'`expr $NumVol - 3`']'  -expr 'a'
 
 echo "und tschuess"
 

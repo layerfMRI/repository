@@ -10,7 +10,7 @@ display(pathtofile);
                 ARG.noise_volume_last = 1;
                 ARG.save_add_info =1;
                 ARG.magnitude_only=1;
-                ARG.factor_error=1.0
+                ARG.factor_error=1.1
                 %ARG.MP = 2; 
                 ARG.kernel_size_PCA = [10, 10, 10]; 
                 ARG.write_gzipped_niftis=1;
