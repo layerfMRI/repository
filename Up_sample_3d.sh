@@ -29,5 +29,4 @@ echo "$sdelta_z"
 
 
 echo "und tschuess"
-
  
