@@ -33,7 +33,7 @@ rm *echotmp*.nii.gz
 
 antsMultivariateTemplateConstruction.sh \
   -d 3 \
-  -o . \
+  -o template_ \
   -i 4 \
   -g 0.2 \
   -j 4 \
