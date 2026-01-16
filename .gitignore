@@ -3,3 +3,5 @@ romeo/bin/romeo.so
 
 # Mac stuff
 *.DS_Store
+Alignement_scripts/align_mesovein_templ.sh
+Alignement_scripts/align_mesovein_templ.sh
