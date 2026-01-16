@@ -2,21 +2,21 @@
 
 
 cnt=100
-for filename in S*_e1.nii.gz
+for filename in S*e1.nii.gz
 do
 cp $filename S${cnt}_echotmp1.nii.gz
 cnt=$(($cnt+1))
 done
 
 cnt=100
-for filename in S*_e2.nii.gz
+for filename in S*e2.nii.gz
 do
 cp $filename S${cnt}_echotmp2.nii.gz
 cnt=$(($cnt+1))
 done
 
 cnt=100
-for filename in S*_e3.nii.gz
+for filename in S*e3.nii.gz
 do
 cp $filename S${cnt}_echotmp3.nii.gz
 cnt=$(($cnt+1))
