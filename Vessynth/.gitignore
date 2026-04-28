@@ -1,0 +1,3 @@
+__pycache*
+models/weights/*
+example_usage.sh

@@ -5,3 +5,4 @@ romeo/bin/romeo.so
 *.DS_Store
 Alignement_scripts/align_mesovein_templ.sh
 Alignement_scripts/align_mesovein_templ.sh
+Vessynth/weights/T2star_model23_epoch465
