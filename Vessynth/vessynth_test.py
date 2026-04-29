@@ -84,14 +84,14 @@ if __name__ == "__main__":
     print(f"Predicting with patch size {patch_size} and step size {step_size}")
 
 
-    model_path = './models/'
+    model_path = '/Users/administrator/Git/repository/Vessynth/models'
     
     if modality == 'OCT':
         model_to_load = glob.glob(model_path + 'weights/OCT_model*')[0]
         json_path = os.path.join(model_path, f'segnet_model_OCT.json') #json file containing backbone info
     elif modality == 'T2star':
-        #model_to_load = glob.glob('./models/weights/T2star_model*')[0]
-        model_to_load = glob.glob(model_path + 'weights/T2star_model23*')[0]
+        model_to_load = glob.glob('/Users/administrator/Git/repository/Vessynth/models/weights/T2star_model*')[0]
+        #model_to_load = glob.glob(model_path + 'weights/T2star_model23*')[0]
         json_path = os.path.join(model_path, f'segnet_model_T2star.json')
     elif modality == 'TOF':
         model_to_load = glob.glob(model_path + 'weights/TOF_model*')[0]
