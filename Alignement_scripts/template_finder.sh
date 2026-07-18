@@ -1,9 +1,6 @@
-inputPath=${PWD}/
-outputPath=${PWD}/TemplateSyN/
-
-${ANTSPATH}/antsMultivariateTemplateConstruction.sh \
+antsMultivariateTemplateConstruction.sh \
   -d 3 \
-  -o ${outputPath}T_ \
+  -o T_ \
   -i 4 \
   -g 0.2 \
   -j 4 \
@@ -15,4 +12,4 @@ ${ANTSPATH}/antsMultivariateTemplateConstruction.sh \
   -r 1 \
   -s CC \
   -t GR \
-  ${inputPath}/*.nii
+ *.nii.gz

@@ -1,0 +1,149 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "nordic"
+description = "NORDIC: Noise Reduction in Diffusion MRI using Complex-Valued Images"
+readme = "../README.md"
+authors = [{name = "nordic developers"}]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "acres",
+    "nibabel",
+    "numpy",
+    "pybids==0.16.5",
+    "scipy",
+    "tqdm",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+dev = ["pre-commit"]
+
+tests = [
+    "codecov",
+    "coverage",
+    "ruff",
+    "pytest",
+    "pytest-cov>=4.0.0",
+    "requests",
+]
+
+# Aliases
+all = ["nordic[dev,tests]"]
+
+[project.scripts]
+nordic = "nordic:cli.nordic_filewise.main"
+bids-nordic = "nordic:cli.nordic_dset.main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+#
+# Hatch configurations
+#
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.sdist]
+exclude = [".git_archival.txt"]  # No longer needed in sdist
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/nordic"]
+exclude = [
+    "nordic/tests/data",  # Large test data directory
+]
+
+##  The following two sections configure setuptools_scm in the hatch way
+
+[tool.hatch.version]
+source = "code"
+path = "src/nordic/_version.py"
+
+#
+# Developer tool configurations
+#
+
+[tool.ruff]
+line-length = 99
+
+[tool.ruff.lint]
+extend-select = [
+  "F",
+  "E",
+  "W",
+  "I",
+  "UP",
+  "YTT",
+  "S",
+  "BLE",
+  "B",
+  "A",
+  # "CPY",
+  "C4",
+  "DTZ",
+  "T10",
+  # "EM",
+  "EXE",
+  "FA",
+  "ISC",
+  "ICN",
+  "PT",
+  "Q",
+]
+ignore = [
+  "S101",  # Ignore use of assert for now
+  "S105",
+  "S311",  # We are not using random for cryptographic purposes
+  "ISC001",
+  "S603",
+]
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "single"
+
+[tool.ruff.lint.extend-per-file-ignores]
+"*/test_*.py" = ["S101"]
+"xcp_d/utils/debug.py" = ["A002", "T100"]
+"docs/conf.py" = ["A001"]
+"docs/sphinxext/github_link.py" = ["BLE001"]
+
+[tool.ruff.format]
+quote-style = "single"
+
+[tool.coverage.run]
+branch = true
+omit = [
+    "*/tests/*",
+    "*/__init__.py",
+    "*/conftest.py",
+    "nordic/_version.py",
+    "matlab/*",
+    "notebooks/*",
+]
+
+[tool.coverage.report]
+# Regexes for lines to exclude from consideration
+exclude_lines = [
+    'raise NotImplementedError',
+    'warnings\.warn',
+]
+
+[tool.pytest.ini_options]
+log_cli = true
+# So `import nordic` and `import utils` work without relying on editable-install path order.
+pythonpath = ['src', 'tests']
